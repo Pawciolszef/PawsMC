@@ -102,3 +102,6 @@ Contributions, bug reports, and suggestions are warmly welcome!
 
 - **PawsMC** is licensed under the [GNU General Public License v3.0 (GPL-3.0)](LICENSE).
 - Based on the open-source **[Modrinth Launcher (Theseus)](https://github.com/modrinth/code)** created by Rinth, Inc. and its wonderful open-source contributors.
+
+> [!IMPORTANT]
+> ## Some parts of PAWSMC were created by AI.
