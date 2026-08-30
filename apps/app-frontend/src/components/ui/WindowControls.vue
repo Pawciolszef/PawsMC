@@ -108,7 +108,7 @@ onUnmounted(() => {
 })
 
 const handleClose = async () => {
-	await saveWindowState(StateFlags.ALL)
+	await saveWindowState(StateFlags.POSITION | StateFlags.SIZE)
 	await getCurrentWindow().close()
 }
 </script>

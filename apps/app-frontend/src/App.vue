@@ -627,8 +627,15 @@ async function setupApp() {
 	}
 
 	Object.assign(appSettings.featureFlags, feature_flags)
-	isMaximized.value = await getCurrentWindow().isMaximized()
-	isFullscreen.value = await getCurrentWindow().isFullscreen()
+	const currentWin = getCurrentWindow()
+	if (await currentWin.isFullscreen()) {
+		await currentWin.setFullscreen(false)
+	}
+	if (await currentWin.isMaximized()) {
+		await currentWin.unmaximize()
+	}
+	isMaximized.value = await currentWin.isMaximized()
+	isFullscreen.value = await currentWin.isFullscreen()
 	os.value = await getOS()
 	const dev = await isDev()
 	isDevEnvironment.value = dev
