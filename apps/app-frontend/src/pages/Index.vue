@@ -4,6 +4,7 @@ import { ContextMenu, defineMessages, injectNotificationManager, useVIntl } from
 import dayjs from 'dayjs'
 import { computed, inject, onActivated, onMounted, ref } from 'vue'
 
+import HomeStatsBar from '@/components/ui/HomeStatsBar.vue'
 import LibrarySection from '@/components/ui/library/index.vue'
 import WelcomeScreen from '@/components/ui/WelcomeScreen.vue'
 import RecentWorldsList from '@/components/ui/world/RecentWorldsList.vue'
@@ -108,13 +109,14 @@ function openPageContextMenu(event: MouseEvent) {
 	<div
 		v-else
 		data-library-page-background
-		class="flex flex-col gap-3 p-6"
+		class="flex flex-col gap-4 p-6"
 		@contextmenu="openPageContextMenu"
 	>
 		<RecentWorldsList
 			v-if="recentInstances?.length > 0 && appSettings.getFeatureFlag('worlds_in_home')"
 			:recent-instances="recentInstances"
 		/>
+		<HomeStatsBar :instances="instances" />
 		<LibrarySection :instances="instances" />
 		<ContextMenu ref="pageOptions" :label="formatMessage(messages.libraryActionsLabel)" />
 	</div>

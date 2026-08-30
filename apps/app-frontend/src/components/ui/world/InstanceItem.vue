@@ -229,7 +229,7 @@ function openContextMenu(event: MouseEvent) {
 						</div>
 						<TagItem
 							v-if="newlyAdded"
-							class="!border-green !bg-bg-green !px-2 !font-medium !text-green"
+							class="!border-brand !bg-bg-brand !px-2 !font-medium !text-brand"
 						>
 							<SparklesIcon aria-hidden="true" />
 							{{ formatMessage(messages.newInstance) }}
@@ -274,7 +274,7 @@ function openContextMenu(event: MouseEvent) {
 						"
 						:disabled="playDisabled"
 						type="colored"
-						color="green"
+						color="brand"
 						@click="play"
 					>
 						<SpinnerIcon v-if="loading" class="animate-spin" />

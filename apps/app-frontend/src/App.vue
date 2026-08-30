@@ -93,6 +93,7 @@ import NewIconEditorNotification from '@/components/ui/new-icon-editor-notificat
 import { shouldShowNewIconEditorNotification } from '@/components/ui/new-icon-editor-notification/show-notification'
 import PrideFundraiserBanner from '@/components/ui/PrideFundraiserBanner.vue'
 import PromotionWrapper from '@/components/ui/PromotionWrapper.vue'
+import QuickGallery from '@/components/ui/QuickGallery.vue'
 import QuickInstanceSwitcher from '@/components/ui/QuickInstanceSwitcher.vue'
 import SharedInstanceInviteHandler from '@/components/ui/shared-instances/shared-instance-invite-handler/index.vue'
 import SplashScreen from '@/components/ui/SplashScreen.vue'
@@ -2220,6 +2221,7 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 							/>
 						</suspense>
 					</div>
+					<QuickGallery />
 				</div>
 			</div>
 
