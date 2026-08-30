@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PawsMC — Simple, Clean Minecraft Launcher</title>
-    <meta name="description" content="PawsMC is a lightweight, ad-free Minecraft launcher built in Rust with zero telemetry.">
+    <meta name="description" content="PawsMC is a lightweight, ad-free Minecraft launcher with zero telemetry and full modding support.">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="apple-touch-icon" href="assets/logo.png">
     
@@ -15,91 +15,85 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="ambient-glow"></div>
-
-    <div class="site-container">
-        <!-- Navigation -->
-        <header class="navbar">
+    <div class="page-container">
+        <!-- Navigation Header -->
+        <header class="header">
             <div class="brand">
-                <img src="assets/logo.png" alt="PawsMC Logo" class="brand-logo">
-                <span class="brand-name">Paws<span class="accent-text">MC</span></span>
+                <img src="assets/logo.png" alt="PawsMC" class="brand-logo">
+                <span class="brand-name">Paws<span class="brand-pink">MC</span></span>
             </div>
             <a href="https://github.com/Pawciolszef/PawsMC" target="_blank" rel="noopener noreferrer" class="btn-github">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                 <span>GitHub</span>
             </a>
         </header>
 
-        <!-- Main Hero Section -->
-        <main class="hero-section">
-            <div class="hero-content">
-                <div class="release-tag">
-                    <span class="tag-dot"></span>
-                    <span id="versionTag">🐾 v1.0.0 Release</span>
-                </div>
-                
-                <h1 class="main-title">
-                    A simple, debloated <br>
-                    <span class="gradient-title">Minecraft launcher.</span>
-                </h1>
-                
-                <p class="main-subtitle">
-                    Fast, lightweight, and completely ad-free. Built in Rust with native performance, instant startup times, and zero background telemetry.
-                </p>
-
-                <!-- Download Actions -->
-                <div class="download-section">
-                    <div class="buttons-row">
-                        <a id="downloadBtn" href="https://github.com/Pawciolszef/PawsMC/releases/latest/download/PawsMC-1.0.0-Setup.exe" class="btn btn-primary">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            <span>Download Installer (.exe)</span>
-                        </a>
-                        <a id="portableBtn" href="https://github.com/Pawciolszef/PawsMC/releases/latest/download/PawsMC-v1.0.0-windows-x64.zip" class="btn btn-secondary">
-                            <span>Portable (.zip)</span>
-                        </a>
-                    </div>
-                    
-                    <div class="trust-pills">
-                        <span class="trust-item"><span class="check-icon">✓</span> 100% Free & Open Source</span>
-                        <span class="trust-item"><span class="check-icon">✓</span> Zero Telemetry</span>
-                        <span class="trust-item"><span class="check-icon">✓</span> Instant Launch</span>
-                    </div>
-                </div>
+        <!-- Main Hero -->
+        <main class="hero">
+            <div class="tag-badge">
+                <span class="tag-icon">🐾</span>
+                <span id="versionBadge">v1.0.0 Release</span>
             </div>
 
-            <!-- Features Grid -->
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-badge badge-rose">⚡ Speed</div>
-                    <h3 class="feature-heading">Built with Rust</h3>
-                    <p class="feature-text">Native compilation means lightning-fast launch times and negligible RAM usage compared to heavy alternatives.</p>
+            <h1 class="hero-title">
+                A simple, debloated <br>
+                <span class="pink-gradient">Minecraft launcher.</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Fast, lightweight, and completely ad-free. Built in Rust with native performance, instantaneous startup, and zero telemetry.
+            </p>
+
+            <!-- Download Buttons Row -->
+            <div class="actions-row">
+                <a id="downloadBtn" href="https://github.com/Pawciolszef/PawsMC/releases/latest/download/PawsMC-1.0.0-Setup.exe" class="btn-pink">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span>Download Installer (.exe)</span>
+                </a>
+                <a id="portableBtn" href="https://github.com/Pawciolszef/PawsMC/releases/latest/download/PawsMC-v1.0.0-windows-x64.zip" class="btn-dark">
+                    <span>Portable (.zip)</span>
+                </a>
+            </div>
+
+            <!-- Concrete 4 Cards -->
+            <div class="cards-grid">
+                <div class="info-card">
+                    <div class="icon-circle icon-pink">🎨</div>
+                    <div class="card-content">
+                        <strong>Fully Customizable</strong>
+                        <p>Personalize your launcher with dynamic pastel accent themes and flexible settings.</p>
+                    </div>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-badge badge-peach">🚫 Clean</div>
-                    <h3 class="feature-heading">100% Ad-Free</h3>
-                    <p class="feature-text">Zero sponsored banners, zero video ads, and zero store upsells. Pure uninterrupted Minecraft gaming.</p>
+                <div class="info-card">
+                    <div class="icon-circle icon-peach">✨</div>
+                    <div class="card-content">
+                        <strong>Easy to Use</strong>
+                        <p>Simple, clean, and intuitive interface with 1-click play and zero clutter.</p>
+                    </div>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-badge badge-lavender">🛡️ Safe</div>
-                    <h3 class="feature-heading">Zero Telemetry</h3>
-                    <p class="feature-text">No user tracking, no session profiling, and no data harvesting. Your privacy is respected unconditionally.</p>
+                <div class="info-card">
+                    <div class="icon-circle icon-purple">🚫</div>
+                    <div class="card-content">
+                        <strong>No Ads & Trackers</strong>
+                        <p>100% ad-free with zero telemetry, data harvesting, or annoying sponsored popups.</p>
+                    </div>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-badge badge-mint">☕ Mods</div>
-                    <h3 class="feature-heading">All Mod Loaders</h3>
-                    <p class="feature-text">Seamless built-in support for Fabric, NeoForge, Forge, and Quilt modpacks, resource packs, and shaders.</p>
+                <div class="info-card">
+                    <div class="icon-circle icon-mint">⚡</div>
+                    <div class="card-content">
+                        <strong>All Mod Loaders</strong>
+                        <p>Full support for Fabric, NeoForge, Forge, and Quilt modpacks and mods.</p>
+                    </div>
                 </div>
             </div>
         </main>
 
-        <!-- Footer -->
+        <!-- Minimal Footer -->
         <footer class="footer">
-            <div class="footer-inner">
-                <p>© 2026 PawsMC • <a href="https://github.com/Pawciolszef/PawsMC" target="_blank" rel="noopener">Source Code</a> • <a href="https://github.com/Pawciolszef/PawsMC/releases" target="_blank" rel="noopener">Releases</a> • Licensed under GPL-3.0</p>
-            </div>
+            <p>© 2026 PawsMC • <a href="https://github.com/Pawciolszef/PawsMC" target="_blank" rel="noopener">GitHub</a> • <a href="https://github.com/Pawciolszef/PawsMC/releases" target="_blank" rel="noopener">Releases</a> • Licensed under GPL-3.0</p>
         </footer>
     </div>
 
