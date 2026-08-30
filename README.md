@@ -1,10 +1,11 @@
 <div align="center">
 
-#  PawsMC Launcher
+# 🐾 PawsMC Launcher
 
 ### A clean, debloated, and ad-free Minecraft launcher
 
-[![GitHub License](https://img.shields.io/github/license/Pawciolszef/PawsMC?style=for-the-badge&color=76b9e8)](LICENSE)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-76b9e8?style=for-the-badge&logo=gnu&logoColor=white)](LICENSE)
+[![Built with AI Assistance](https://img.shields.io/badge/Developed-with%20AI%20Assistance-8a2be2?style=for-the-badge&logo=sparkles&logoColor=white)](https://github.com/Pawciolszef/PawsMC)
 [![GitHub Release](https://img.shields.io/github/v/release/Pawciolszef/PawsMC?style=for-the-badge&color=76b9e8)](https://github.com/Pawciolszef/PawsMC/releases)
 [![Build Status](https://img.shields.io/badge/Build-Passing-76b9e8?style=for-the-badge)](https://github.com/Pawciolszef/PawsMC)
 
@@ -21,11 +22,15 @@
 > **PawsMC is an independent, open-source fork of the official [Modrinth App (Theseus)](https://github.com/modrinth/theseus / [modrinth/code](https://github.com/modrinth/code)).**  
 > We have immense respect for the Modrinth team and their work. PawsMC builds upon the rock-solid foundation of the Modrinth App codebase while reshaping it into a fully debloated, ad-free, and community-first client.
 
+> [!NOTE]
+> ### 🤖 AI Collaboration Notice
+> This project is **developed and maintained with AI assistance** (pair programming for refactoring, debloating, optimization, and bug fixing) in collaboration with human maintainers.
+
 ---
 
 ## ✨ What Makes PawsMC Different?
 
-| Feature | Official Modrinth App |  PawsMC Launcher |
+| Feature | Official Modrinth App | 🐾 PawsMC Launcher |
 | :--- | :---: | :---: |
 | **Advertisements** | Included (Sidebar/Popups) | 🚫 **Completely Removed** |
 | **Telemetry & Analytics** | Enabled (PostHog / Sentry) | 🛡️ **Disabled & Stripped** |
@@ -33,7 +38,7 @@
 | **UI Clutter & Checklists** | Onboarding naggings / News feed | 💎 **Minimal & Focused** |
 | **Theme & Aesthetic** | Standard Green/Dark | 🌸 **Baby Blue Pastel Palette** |
 | **Mod & Modpack Support** | Full Modrinth Ecosystem | ⚡ **100% Fully Compatible** |
-| **License** | GNU GPL v3.0 | 📜 **GNU GPL v3.0** |
+| **License** | GNU GPL v3.0 | 📜 **[GNU GPL v3.0](LICENSE)** |
 
 ---
 
@@ -101,7 +106,4 @@ Contributions, bug reports, and suggestions are warmly welcome!
 ## 📜 License & Acknowledgments
 
 - **PawsMC** is licensed under the [GNU General Public License v3.0 (GPL-3.0)](LICENSE).
-- Based on the open-source **[Modrinth Launcher (Theseus)](https://github.com/modrinth/code)** created by Rinth, Inc. and its wonderful open-source contributors.
-
-> [!IMPORTANT]
-> ## Some parts of PAWSMC were created by AI.
+- Based on the open-source **[Modrinth Launcher (Theseus)](https://github.com/modrinth/code)** created by Rinth, Inc. and its open-source contributors.
