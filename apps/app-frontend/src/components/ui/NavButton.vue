@@ -18,7 +18,7 @@
 		v-bind="$attrs"
 		class="button-animation border-none text-primary cursor-pointer w-12 h-12 rounded-full flex items-center justify-center text-2xl transition-all bg-transparent hover:bg-button-bg hover:text-contrast"
 		:disabled="disabled"
-		@click="to"
+		@click="handleClick"
 	>
 		<slot />
 	</button>
@@ -32,7 +32,7 @@ const route = useRoute()
 
 type RouteFunction = (route: RouteLocationNormalizedLoaded) => boolean
 
-withDefaults(
+const props = withDefaults(
 	defineProps<{
 		to: (() => void) | string
 		isPrimary?: RouteFunction
@@ -44,6 +44,12 @@ withDefaults(
 		disabled: false,
 	},
 )
+
+function handleClick() {
+	if (typeof props.to === 'function') {
+		props.to()
+	}
+}
 
 defineOptions({
 	inheritAttrs: false,

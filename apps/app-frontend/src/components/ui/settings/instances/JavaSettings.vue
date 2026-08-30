@@ -15,7 +15,7 @@ const messages = defineMessages({
 	},
 })
 
-const javaVersions = ref(await get_java_versions().catch(handleError))
+const javaVersions = ref((await get_java_versions().catch(handleError)) ?? {})
 async function updateJavaVersion(version) {
 	if (version?.path === '') {
 		version.path = undefined
