@@ -88,9 +88,6 @@ Ensure you have the following installed:
 git clone https://github.com/Pawciolszef/PawsMC.git
 cd PawsMC
 
-# Checkout development branch
-git checkout dev
-
 # Install all dependencies
 pnpm install
 ```
@@ -111,11 +108,13 @@ pnpm app:build
 
 ---
 
-## 🤝 Contributing
+## 🛑 Contributing Policy
 
-Contributions, bug reports, and suggestions are warmly welcome!
-- Please submit all pull requests against the **`dev`** branch.
-- Keep the code clean, fast, and free of trackers or bloatware.
+**PawsMC is a personal open-source project maintained solely by the author.**
+
+- 🚫 **No Pull Requests**: External contributions, unsolicited PRs, and third-party code additions are **not accepted**.
+- 🐛 **Bug Reports**: If you find a bug, you may open an issue in the [GitHub Issues](https://github.com/Pawciolszef/PawsMC/issues) tracker.
+- 🍴 **Forks**: You are completely free to fork this project and build your own version under the terms of the [GPL-3.0 License](LICENSE).
 
 ---
 
