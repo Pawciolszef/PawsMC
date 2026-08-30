@@ -25,7 +25,7 @@
 
 <script setup>
 import { injectLoadingState } from '@modrinth/ui'
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 import ProgressBar from '@/components/ui/ProgressBar.vue'
 import { useAppEvent } from '@/composables/use-app-event'
@@ -41,6 +41,14 @@ const MIN_DISPLAY_MS = 500
 const mountedAt = Date.now()
 
 const loading = injectLoadingState()
+
+onMounted(() => {
+	// Safety timeout: ensure splash screen always closes after 1.5s
+	setTimeout(() => {
+		loadingProgress.value = 100
+		doneLoading.value = true
+	}, 1500)
+})
 
 function onAfterLeave() {
 	loading.setEnabled(true)
