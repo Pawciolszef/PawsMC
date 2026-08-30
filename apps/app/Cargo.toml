@@ -1,10 +1,9 @@
 [package]
 name = "pawsmc_gui"
-# The actual version is set by the theseus-build workflow on tagging
-version = "1.0.0-local"
+version = "1.0.0"
 edition.workspace = true
 description = "PawsMC - The ultimate Minecraft launcher experience"
-repository = "https://github.com/pawsmc/launcher"
+repository = "https://github.com/Pawciolszef/PawsMC"
 license = "GPL-3.0-only"
 
 [dependencies]
