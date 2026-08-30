@@ -262,19 +262,19 @@ defineExpose({ show, edit, hide, next, previous, markSavedAndView })
 				@click.stop
 			>
 				<div
-					class="pointer-events-auto flex flex-col items-center max-w-[min(44rem,90vw)] px-5 py-2.5 rounded-2xl bg-surface-2/90 border border-solid border-surface-4 shadow-2xl backdrop-blur-md text-center"
+					class="pointer-events-auto flex flex-col items-center max-w-[min(44rem,90vw)] px-5 py-2.5 rounded-2xl bg-neutral-900/90 border border-solid border-white/15 shadow-2xl backdrop-blur-md text-center"
 				>
 					<h2
 						v-if="activeItem.title"
 						ref="titleElement"
-						class="m-0 max-w-full truncate text-sm font-semibold leading-snug text-contrast"
+						class="m-0 max-w-full truncate text-sm font-semibold leading-snug text-white"
 					>
 						{{ activeItem.title }}
 					</h2>
 					<p
 						v-if="activeItem.description"
 						ref="descriptionElement"
-						class="mb-0 mt-0.5 max-w-full truncate text-xs leading-snug text-secondary"
+						class="mb-0 mt-0.5 max-w-full truncate text-xs leading-snug text-white/70"
 					>
 						{{ activeItem.description }}
 					</p>
