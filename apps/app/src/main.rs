@@ -75,7 +75,7 @@ fn is_dev() -> bool {
 #[tauri::command]
 fn are_updates_enabled() -> bool {
     cfg!(feature = "updater")
-        && env::var("MODRINTH_EXTERNAL_UPDATE_PROVIDER").is_err()
+        && env::var("PAWSMC_EXTERNAL_UPDATE_PROVIDER").is_err()
 }
 
 #[cfg(feature = "updater")]
@@ -140,7 +140,7 @@ fn main() {
 
     let _log_guard = theseus::start_logger(&tauri_context.config().identifier);
 
-    tracing::info!("Initialized tracing subscriber. Loading Modrinth App!");
+    tracing::info!("Initialized tracing subscriber. Loading PawsMC!");
 
     let mut builder = tauri::Builder::default();
 
@@ -404,7 +404,7 @@ fn main() {
                     DialogBuilder::message()
                         .set_level(MessageLevel::Error)
                         .set_title("Initialization error")
-                        .set_text("Your Microsoft Edge WebView2 installation is corrupt.\n\nMicrosoft Edge WebView2 is required to run Modrinth App.\n\nLearn how to repair it at https://support.modrinth.com/en/articles/8797765-corrupted-microsoft-edge-webview2-installation")
+                        .set_text("Your Microsoft Edge WebView2 installation is corrupt.\n\nMicrosoft Edge WebView2 is required to run PawsMC.\n\nLearn how to repair it at https://support.modrinth.com/en/articles/8797765-corrupted-microsoft-edge-webview2-installation")
                         .alert()
                         .show()
                         .unwrap();

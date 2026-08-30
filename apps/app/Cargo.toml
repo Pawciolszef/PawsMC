@@ -1,10 +1,10 @@
 [package]
-name = "theseus_gui"
+name = "pawsmc_gui"
 # The actual version is set by the theseus-build workflow on tagging
 version = "1.0.0-local"
 edition.workspace = true
-description = "The Modrinth App is a desktop application for managing your Minecraft mods"
-repository = "https://github.com/modrinth/code/apps/app/"
+description = "PawsMC - The ultimate Minecraft launcher experience"
+repository = "https://github.com/pawsmc/launcher"
 license = "GPL-3.0-only"
 
 [dependencies]

@@ -1,5 +1,5 @@
 {
-  "name": "@modrinth/monorepo",
+  "name": "@pawsmc/monorepo",
   "version": "0.0.0",
   "private": true,
   "scripts": {
