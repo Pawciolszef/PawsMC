@@ -2,7 +2,7 @@
 import { PlayIcon, PlusIcon } from '@modrinth/assets'
 import { ContextMenu, defineMessages, injectNotificationManager, useVIntl } from '@modrinth/ui'
 import dayjs from 'dayjs'
-import { computed, inject, onActivated, ref } from 'vue'
+import { computed, inject, onActivated, onMounted, ref } from 'vue'
 
 import LibrarySection from '@/components/ui/library/index.vue'
 import WelcomeScreen from '@/components/ui/WelcomeScreen.vue'
@@ -73,9 +73,13 @@ async function fetchInstances() {
 	}
 }
 
-if (hasCreatedInstance.value) {
-	await fetchInstances()
-}
+onMounted(() => {
+	void fetchInstances()
+})
+
+onActivated(() => {
+	void fetchInstances()
+})
 
 useAppEvent('instance', fetchInstances)
 useAppEvent('instance_groups_changed', fetchInstances)
@@ -102,9 +106,9 @@ function openPageContextMenu(event: MouseEvent) {
 </script>
 
 <template>
-	<WelcomeScreen v-if="isReady && !hasCreatedInstance" />
+	<WelcomeScreen v-if="instances.length === 0 && !hasCreatedInstance" />
 	<div
-		v-else-if="isReady"
+		v-else
 		data-library-page-background
 		class="flex flex-col gap-3 p-6"
 		@contextmenu="openPageContextMenu"
