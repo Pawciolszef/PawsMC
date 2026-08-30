@@ -222,5 +222,7 @@ onBeforeRouteUpdate(async (to) => {
 	await ensureUserProfileData(id)
 })
 
-await ensureUserProfileData(userId.value)
+onMounted(() => {
+	void ensureUserProfileData(userId.value)
+})
 </script>

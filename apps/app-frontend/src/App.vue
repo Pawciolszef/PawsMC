@@ -2200,11 +2200,9 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 
 			<RouterView v-slot="{ Component }">
 				<template v-if="Component">
-					<Suspense @pending="onSuspensePending" @resolve="onSuspenseResolve">
-						<KeepAlive include="LibraryPage">
-							<component :is="Component"></component>
-						</KeepAlive>
-					</Suspense>
+					<KeepAlive include="LibraryPage">
+						<component :is="Component" :key="route.fullPath"></component>
+					</KeepAlive>
 				</template>
 			</RouterView>
 		</div>

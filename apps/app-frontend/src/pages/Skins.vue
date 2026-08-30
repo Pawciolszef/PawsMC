@@ -1052,8 +1052,14 @@ async function checkUserChanges() {
 	}
 }
 
-await Promise.all([loadCapes(), loadCurrentUser()])
-await loadSkins()
+onMounted(async () => {
+	try {
+		await Promise.all([loadCapes(), loadCurrentUser()])
+		await loadSkins()
+	} catch (e) {
+		console.warn('Error loading skin data on mount:', e)
+	}
+})
 </script>
 
 <template>
