@@ -1,21 +1,11 @@
-# Copying Guidelines
+# Copying & Licensing Guidelines
 
-All packages in this repository are licensed under their respective licenses. For more information, refer to the LICENSE file in each package.
+PawsMC is licensed under the **GNU General Public License v3.0 (GPL-3.0)**.
 
-For detailed information, consult each package's COPYING.md, LICENSE.txt, or LICENSE file, if available.
+For full license terms and conditions, see the [LICENSE](LICENSE) file in the root directory.
 
-## Modrinth Branding
+## Trademark & Branding Notice
 
-The use of Modrinth branding elements, including but not limited to the wrench-in-labyrinth logo, the landing image, and any variations thereof, is strictly prohibited without explicit written permission from Rinth, Inc. This includes trademarks, logos, or other branding elements.
-
-> All rights reserved. © 2020-2025 Rinth, Inc.
-
-This includes, but may not be limited to, the following files:
-
-- .idea/icon.svg
-- .github/api_cover.png
-- .github/app_cover.png
-- .github/monorepo_cover.png
-- .github/web_cover.png
-
-If you fork this repository, you must remove all Modrinth branding assets from your fork.
+- **PawsMC** is an independent community project and is not affiliated with, endorsed by, or sponsored by Rinth, Inc. or Mojang Studios / Microsoft.
+- In compliance with Rinth, Inc.'s trademark policy, all proprietary Modrinth branding assets, logos, and account services have been removed from this repository.
+- Minecraft is a trademark of Mojang AB / Microsoft.
