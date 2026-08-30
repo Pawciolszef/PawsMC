@@ -112,7 +112,7 @@ import { useQuery, useQueryClient } from '@tanstack/vue-query'
 import { useOnline } from '@vueuse/core'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { computed, type ComputedRef, onUnmounted, ref, shallowRef, watch } from 'vue'
+import { computed, type ComputedRef, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue'
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
 
 import ExportModal from '@/components/ui/ExportModal.vue'
@@ -290,12 +290,12 @@ function isUnmanagedInstanceError(error: unknown) {
 	return error instanceof Error && error.message.includes('is not managed')
 }
 
-try {
-	await ensureCriticalInstanceData(instanceId.value)
-} catch (error) {
-	if (isUnmanagedInstanceError(error)) await router.replace('/')
-	else handleError(toError(error))
-}
+onMounted(() => {
+	ensureCriticalInstanceData(instanceId.value).catch((error) => {
+		if (isUnmanagedInstanceError(error)) void router.replace('/')
+		else handleError(toError(error))
+	})
+})
 
 onBeforeRouteUpdate(async (to, from) => {
 	const targetInstanceId = String(to.params.id ?? '')

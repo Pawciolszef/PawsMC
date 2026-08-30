@@ -984,6 +984,10 @@ const appSettingsModal = ref()
 provide(appSettingsModalOpenProfileKey, () => appSettingsModal.value?.showProfile())
 provide(appSettingsModalOpenSyncedOptionsKey, () => appSettingsModal.value?.showSyncedOptions())
 
+function openAppSettingsModal() {
+	appSettingsModal.value?.show()
+}
+
 watch(incompatibilityWarningModal, (modal) => {
 	if (modal) {
 		setContentIncompatibilityWarningModal(modal)
@@ -1956,9 +1960,7 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 				</span>
 			</div>
 		</Transition>
-		<Suspense>
-			<AppSettingsModal ref="appSettingsModal" />
-		</Suspense>
+		<AppSettingsModal ref="appSettingsModal" />
 		<Suspense>
 			<ModrinthAccountRequiredModal ref="modrinthLoginModal" :request-auth="requestModrinthAuth" />
 		</Suspense>
@@ -2030,7 +2032,7 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 			<div class="flex flex-grow"></div>
 			<NavButton
 				v-tooltip.right="formatMessage(commonMessages.settingsLabel)"
-				:to="() => appSettingsModal?.show()"
+				:to="openAppSettingsModal"
 			>
 				<SettingsIcon />
 			</NavButton>

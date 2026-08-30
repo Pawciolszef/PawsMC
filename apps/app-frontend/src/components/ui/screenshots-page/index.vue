@@ -1428,20 +1428,19 @@ onBeforeUnmount(() => {
 		class="flex h-full w-full flex-col gap-3"
 		:class="{ 'justify-center': screenshots.length === 0 && !groupIdPendingNameEdit }"
 	>
-		<template v-if="screenshots.length > 0 || groupIdPendingNameEdit">
-			<h1 v-if="showHeading" class="m-0 text-2xl font-bold text-contrast">
-				{{ formatMessage(messages.heading) }}
-			</h1>
+		<h1 v-if="showHeading" class="m-0 text-2xl font-bold text-contrast">
+			{{ formatMessage(messages.heading) }}
+		</h1>
 
-			<ScreenshotToolbar
-				v-model:search="search"
-				v-model:sort="sortModel"
-				v-model:group="groupByModel"
-				:sort-options="sortOptions"
-				:group-options="groupOptions"
-				@new-group="createCustomGroup"
-			/>
-		</template>
+		<ScreenshotToolbar
+			v-if="screenshots.length > 0 || groupIdPendingNameEdit"
+			v-model:search="search"
+			v-model:sort="sortModel"
+			v-model:group="groupByModel"
+			:sort-options="sortOptions"
+			:group-options="groupOptions"
+			@new-group="createCustomGroup"
+		/>
 
 		<ReadyTransition :pending="screenshotsReadyPending">
 			<EmptyState
