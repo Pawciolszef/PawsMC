@@ -1,39 +1,104 @@
-# ![Modrinth Monorepo Cover](/.github/assets/monorepo_cover.png)
+<div align="center">
 
-![Issues](https://img.shields.io/github/issues-raw/Modrinth/code?color=c78aff&label=issues&style=for-the-badge)
-![Pull Requests](https://img.shields.io/github/issues-pr-raw/Modrinth/code?color=c78aff&label=PRs&style=for-the-badge)
-![Contributors](https://img.shields.io/github/contributors/Modrinth/code?color=c78aff&label=contributors&style=for-the-badge)
-![Lines of Code](https://img.shields.io/endpoint?url=https://loctopus.creeperkatze.dev/github/modrinth/code/badge?style=flat&logoColor=white&color=c78aff&style=for-the-badge)
-![Commit Activity](https://img.shields.io/github/commit-activity/m/Modrinth/code?color=c78aff&label=commits&style=for-the-badge)
-![Last Commit](https://img.shields.io/github/last-commit/Modrinth/code?color=c78aff&label=last%20commit&style=for-the-badge)
+# 🐾 PawsMC Launcher
 
-## Modrinth Monorepo
+### A clean, debloated, and ad-free Minecraft launcher
 
-Welcome to the Modrinth Monorepo, the primary codebase for the Modrinth web interface and app. It contains ![Lines of code](https://img.shields.io/endpoint?url=https://loctopus.creeperkatze.dev/github/modrinth/code/badge%3Fformat%3Dhuman&logoColor=white&color=black&label=) lines of code and has ![Contributors](https://img.shields.io/github/contributors/Modrinth/code?color=black&label=) contributors!
+[![GitHub License](https://img.shields.io/github/license/Pawciolszef/PawsMC?style=for-the-badge&color=76b9e8)](LICENSE)
+[![GitHub Release](https://img.shields.io/github/v/release/Pawciolszef/PawsMC?style=for-the-badge&color=76b9e8)](https://github.com/Pawciolszef/PawsMC/releases)
+[![Build Status](https://img.shields.io/badge/Build-Passing-76b9e8?style=for-the-badge)](https://github.com/Pawciolszef/PawsMC)
 
-If you're not a developer and you've stumbled upon this repository, you can access the web interface on the [Modrinth website](https://modrinth.com) and download the latest release of the app [here](https://modrinth.com/app).
+<p align="center">
+  <b>PawsMC</b> is a lightweight, privacy-respecting Minecraft launcher built for players who want a fast, beautiful, and distraction-free experience.
+</p>
 
-## Development
+---
 
-This repository contains two primary packages. For detailed development information, please refer to their respective guides:
+</div>
 
-- [Website frontend](https://docs.modrinth.com/contributing/knossos/)
-- [Desktop app](https://docs.modrinth.com/contributing/theseus/)
+> [!IMPORTANT]
+> ### 📌 Fork Attribution & Transparency
+> **PawsMC is an independent, open-source fork of the official [Modrinth App (Theseus)](https://github.com/modrinth/theseus / [modrinth/code](https://github.com/modrinth/code)).**  
+> We have immense respect for the Modrinth team and their work. PawsMC builds upon the rock-solid foundation of the Modrinth App codebase while reshaping it into a fully debloated, ad-free, and community-first client.
 
-## Contributing
+---
 
-We welcome contributions! Before submitting any contributions, please read our [contributing guidelines](https://docs.modrinth.com/contributing/getting-started/).
+## ✨ What Makes PawsMC Different?
 
-If you plan to fork this repository for your own purposes, please review our [copying guidelines](COPYING.md).
+| Feature | Official Modrinth App | 🐾 PawsMC Launcher |
+| :--- | :---: | :---: |
+| **Advertisements** | Included (Sidebar/Popups) | 🚫 **Completely Removed** |
+| **Telemetry & Analytics** | Enabled (PostHog / Sentry) | 🛡️ **Disabled & Stripped** |
+| **Server Hosting Upsells** | Promoted in UI | 🧹 **Debloated & Cleaned** |
+| **UI Clutter & Checklists** | Onboarding naggings / News feed | 💎 **Minimal & Focused** |
+| **Theme & Aesthetic** | Standard Green/Dark | 🌸 **Baby Blue Pastel Palette** |
+| **Mod & Modpack Support** | Full Modrinth Ecosystem | ⚡ **100% Fully Compatible** |
+| **License** | GNU GPL v3.0 | 📜 **GNU GPL v3.0** |
 
-## Security
+---
 
-If you discover a security vulnerability within our codebase, please follow our [responsible disclosure guidelines](https://modrinth.com/legal/security).
+## 🚀 Key Features
 
-## Support
+- **🚫 100% Ad-Free Experience**: No ad windows, no sponsored blocks, no consent popups, no distraction.
+- **⚡ Supercharged Performance**: Stripped unnecessary background telemetry and background network polls for snappy UI and faster instance loading.
+- **🎨 Custom Aesthetic**: Clean Pastel Baby Blue theme, custom branding, and a streamlined sidebar that keeps your Minecraft instances front and center.
+- **📦 Full Ecosystem Compatibility**:
+  - Install and update any Modrinth modpack, mod, resource pack, shader, or datapack with one click.
+  - Multi-version support for **Fabric, NeoForge, Forge, and Quilt**.
+  - Integrated Minecraft Java Edition account management and skin changer.
+  - Quick instance switcher and isolated game profiles.
 
-If you need help with the Modrinth web interface or app, please visit our [support page](https://support.modrinth.com). For general inquiries, you can also join our [Discord server](https://discord.modrinth.com).
+---
 
-## License
+## 🛠️ Building From Source
 
-All packages in this repository are licensed under their respective licenses. Refer to the LICENSE file in each package for more information.
+### Prerequisites
+
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v20+ or v22+)
+- [pnpm](https://pnpm.io/) (v10+)
+- [Rust & Cargo](https://rustup.rs/) (latest stable)
+- [C++ Build Tools for Windows](https://visualstudio.microsoft.com/visual-cpp-build-tools/) / standard Linux build essentials
+
+### Clone and Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/Pawciolszef/PawsMC.git
+cd PawsMC
+
+# Checkout development branch
+git checkout dev
+
+# Install all dependencies
+pnpm install
+```
+
+### Run in Development Mode
+
+```powershell
+# Run the desktop app with hot reload
+pnpm app:dev
+```
+
+### Build Production Binary
+
+```powershell
+# Build the production executable
+pnpm app:build
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions, bug reports, and suggestions are warmly welcome!
+- Please submit all pull requests against the **`dev`** branch.
+- Keep the code clean, fast, and free of trackers or bloatware.
+
+---
+
+## 📜 License & Acknowledgments
+
+- **PawsMC** is licensed under the [GNU General Public License v3.0 (GPL-3.0)](LICENSE).
+- Based on the open-source **[Modrinth Launcher (Theseus)](https://github.com/modrinth/code)** created by Rinth, Inc. and its wonderful open-source contributors.
