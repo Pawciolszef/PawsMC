@@ -727,11 +727,6 @@ const selectableProjectTypes = computed(() => {
 			shown: dataPacks,
 		},
 		{ label: formatMessage(messages.shadersProjectType), href: `/browse/shader${suffix}` },
-		{
-			label: formatMessage(messages.serversProjectType),
-			href: `/browse/server${suffix}`,
-			shown: !instance.value,
-		},
 	]
 })
 
