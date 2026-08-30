@@ -170,7 +170,7 @@ onMounted(() => {
 <template>
 	<template v-if="compact">
 		<div
-			class="card-shadow grid grid-cols-[auto_1fr_auto] bg-bg-raised rounded-xl p-3 pl-4 gap-2 cursor-pointer hover:brightness-90 transition-all"
+			class="card-shadow grid grid-cols-[auto_1fr_auto] bg-bg-raised/90 border border-white/5 hover:border-brand/40 rounded-xl p-3 pl-4 gap-2 cursor-pointer hover:brightness-105 transition-all duration-200 hover:-translate-y-0.5"
 			@click="seeInstance"
 			@mouseenter="checkProcess"
 		>
@@ -234,7 +234,7 @@ onMounted(() => {
 	</template>
 	<div v-else>
 		<div
-			class="button-base bg-bg-raised p-4 rounded-xl flex gap-3 group"
+			class="button-base bg-bg-raised/90 border border-white/5 hover:border-brand/40 shadow-sm hover:shadow-brand/20 p-4 rounded-xl flex gap-3 group transition-all duration-200 hover:-translate-y-0.5"
 			@click="seeInstance"
 			@mouseenter="checkProcess"
 		>
