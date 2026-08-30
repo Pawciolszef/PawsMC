@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🐾 PawsMC Launcher
+#  PawsMC Launcher
 
 ### A clean, debloated, and ad-free Minecraft launcher
 
