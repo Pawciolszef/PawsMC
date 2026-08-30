@@ -4,6 +4,7 @@
 
 ### A clean, debloated, and ad-free Minecraft launcher
 
+[![Website: pawsmc.pawciol.eu](https://img.shields.io/badge/🌐_Website-pawsmc.pawciol.eu-76b9e8?style=for-the-badge&logo=googlechrome&logoColor=white)](https://pawsmc.pawciol.eu)
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-76b9e8?style=for-the-badge&logo=gnu&logoColor=white)](https://github.com/Pawciolszef/PawsMC/blob/main/LICENSE)
 [![Built with AI Assistance](https://img.shields.io/badge/Developed-with%20AI%20Assistance-8a2be2?style=for-the-badge&logo=sparkles&logoColor=white)](https://github.com/Pawciolszef/PawsMC)
 [![GitHub Release](https://img.shields.io/github/v/release/Pawciolszef/PawsMC?style=for-the-badge&color=76b9e8)](https://github.com/Pawciolszef/PawsMC/releases)
@@ -12,6 +13,8 @@
 <p align="center">
   <b>PawsMC</b> is a lightweight, privacy-respecting Minecraft launcher built for players who want a fast, beautiful, and distraction-free experience.
 </p>
+
+[**🌐 Visit Official Website**](https://pawsmc.pawciol.eu) • [**📥 Download Releases**](https://github.com/Pawciolszef/PawsMC/releases) • [**💬 Report an Issue**](https://github.com/Pawciolszef/PawsMC/issues)
 
 ---
 
@@ -24,7 +27,7 @@
 
 > [!NOTE]
 > ### 🤖 AI Collaboration Notice
-> This project is **developed and maintained with AI assistance** (pair programming for refactoring, debloating, optimization, and bug fixing) in collaboration with human maintainers.
+> This project is **developed and maintained with AI assistance** (pair programming for refactoring, debloating, optimization, and feature engineering) in collaboration with human maintainers.
 
 ---
 
@@ -34,9 +37,11 @@
 | :--- | :---: | :---: |
 | **Advertisements** | Included (Sidebar/Popups) | 🚫 **Completely Removed** |
 | **Telemetry & Analytics** | Enabled (PostHog / Sentry) | 🛡️ **Disabled & Stripped** |
-| **Server Hosting Upsells** | Promoted in UI | 🧹 **Debloated & Cleaned** |
+| **Server Hosting Upsells** | Promoted in UI / Browse tab | 🧹 **Debloated & Cleaned** |
 | **UI Clutter & Checklists** | Onboarding naggings / News feed | 💎 **Minimal & Focused** |
-| **Theme & Aesthetic** | Standard Green/Dark | 🌸 **Baby Blue Pastel Palette** |
+| **Accent Theme Palettes** | Single Green accent | 🎨 **4 Custom Accent Palettes** |
+| **Discord Rich Presence** | Generic Modrinth App | 👾 **Custom PawsMC + Live Playtime** |
+| **Quick Play & Gallery** | Not available | ⚡ **1-Click Launch & Screenshot Hub** |
 | **Mod & Modpack Support** | Full Modrinth Ecosystem | ⚡ **100% Fully Compatible** |
 | **License** | GNU GPL v3.0 | 📜 **[GNU GPL v3.0](LICENSE)** |
 
@@ -46,7 +51,18 @@
 
 - **🚫 100% Ad-Free Experience**: No ad windows, no sponsored blocks, no consent popups, no distraction.
 - **⚡ Supercharged Performance**: Stripped unnecessary background telemetry and background network polls for snappy UI and faster instance loading.
-- **🎨 Custom Aesthetic**: Clean Pastel Baby Blue theme, custom branding, and a streamlined sidebar that keeps your Minecraft instances front and center.
+- **🎨 Dynamic Accent Themes**: Switch effortlessly between 4 customizable accent color palettes:
+  - 🩵 **Baby Blue** *(Default PawsMC)*
+  - 🌸 **Sakura Pink** *(Pastel Pink)*
+  - 💜 **Cyber Violet** *(Neon Lavender)*
+  - 🌿 **Mint Green** *(Fresh Emerald)*
+- **⚡ Quick Play Widget**: 1-click button in the sidebar to immediately launch or stop your most recently played instance.
+- **🖼️ Quick Gallery & Screenshot Lightbox**:
+  - Live thumbnail of your latest Minecraft screenshot in the sidebar.
+  - 1-click copy image directly to system clipboard.
+  - Theme-adaptive full-screen lightbox viewer with smooth zoom and controls.
+- **📊 Playtime & Library Statistics**: Real-time stats bar on the home screen tracking total playtime across all instances, time played today, and installed instance counters.
+- **👾 Enhanced Discord Rich Presence**: Shows PawsMC mascot branding, the exact modpack or instance you are playing, and live elapsed in-game playtime.
 - **📦 Full Ecosystem Compatibility**:
   - Install and update any Modrinth modpack, mod, resource pack, shader, or datapack with one click.
   - Multi-version support for **Fabric, NeoForge, Forge, and Quilt**.
