@@ -13,7 +13,6 @@ import { toError } from '@/helpers/errors'
 import { list } from '@/helpers/instance'
 import type { GameInstance } from '@/helpers/types'
 import { useRootBreadcrumb } from '@/providers/breadcrumbs'
-import { injectOnboardingChecklist } from '@/providers/onboarding-checklist'
 
 defineOptions({
 	name: 'LibraryPage',
@@ -21,7 +20,6 @@ defineOptions({
 
 const { handleError } = injectNotificationManager()
 const { formatMessage } = useVIntl()
-const { hasCreatedInstance, isReady } = injectOnboardingChecklist()
 const showCreationModal = inject<() => void>('showCreationModal')
 const pageOptions = ref<InstanceType<typeof ContextMenu>>()
 const appSettings = useAppSettings()
