@@ -16,43 +16,7 @@ export default new createRouter({
 			name: 'Home',
 			component: Pages.Index,
 		},
-		{
-			path: '/hosting/manage/',
-			name: 'Servers',
-			component: Pages.Servers,
-		},
-		{
-			path: '/hosting/manage/:id',
-			name: 'ServerManage',
-			component: Hosting.Index,
-			children: [
-				{
-					path: '',
-					name: 'ServerManageOverview',
-					component: Hosting.Overview,
-				},
-				{
-					path: 'content',
-					name: 'ServerManageContent',
-					component: Hosting.Content,
-				},
-				{
-					path: 'files',
-					name: 'ServerManageFiles',
-					component: Hosting.Files,
-				},
-				{
-					path: 'backups',
-					name: 'ServerManageBackups',
-					component: Hosting.Backups,
-				},
-				{
-					path: 'access',
-					name: 'ServerManageAccess',
-					component: Hosting.Access,
-				},
-			],
-		},
+
 		{
 			path: '/browse/:projectType',
 			name: 'Discover content',

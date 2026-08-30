@@ -10,9 +10,9 @@
 				>
 					<defs>
 						<linearGradient id="splash-paws-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-							<stop offset="0%" stop-color="#C084FC" />
-							<stop offset="50%" stop-color="#7C3AED" />
-							<stop offset="100%" stop-color="#06B6D4" />
+							<stop offset="0%" stop-color="#BAE6FD" />
+							<stop offset="50%" stop-color="#38BDF8" />
+							<stop offset="100%" stop-color="#0284C7" />
 						</linearGradient>
 						<filter id="splash-paws-glow" x="-20%" y="-20%" width="140%" height="140%">
 							<feGaussianBlur stdDeviation="8" result="blur" />

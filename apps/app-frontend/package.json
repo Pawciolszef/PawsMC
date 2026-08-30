@@ -1,5 +1,5 @@
 {
-	"name": "@pawsmc/app-frontend",
+	"name": "@modrinth/app-frontend",
 	"private": true,
 	"version": "1.0.0-local",
 	"type": "module",
