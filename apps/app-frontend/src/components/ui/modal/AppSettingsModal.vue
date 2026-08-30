@@ -246,15 +246,30 @@ defineExpose({ show, showProfile, showFeatureFlags, showSyncedOptions })
 
 const { progress, version: downloadingVersion } = injectAppUpdateDownloadProgress()
 
-const version = await getVersion()
-const osPlatform = getOsPlatform()
-const osVersion = getOsVersion()
-const settings = ref(await get())
+const version = ref('')
+const osPlatform = ref('')
+const osVersion = ref('')
+const settings = ref<any>(null)
+
+async function loadSettings() {
+	try {
+		version.value = await getVersion()
+		osPlatform.value = getOsPlatform()
+		osVersion.value = getOsVersion()
+		settings.value = await get()
+	} catch {
+		setTimeout(loadSettings, 400)
+	}
+}
+
+void loadSettings()
 
 watch(
 	settings,
 	async () => {
-		await set(settings.value)
+		if (settings.value) {
+			await set(settings.value)
+		}
 	},
 	{ deep: true },
 )

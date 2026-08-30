@@ -4,21 +4,21 @@ import { ref } from 'vue'
 
 import { get_game_versions, get_loaders } from '@/helpers/tags'
 
-export function setupTagsProvider(notificationManager: AbstractWebNotificationManager) {
-	const { handleError } = notificationManager
-
+export function setupTagsProvider(_notificationManager: AbstractWebNotificationManager) {
 	const gameVersions = ref([])
 	const loaders = ref([])
-	get_game_versions()
-		.then((v) => {
+
+	async function loadTags() {
+		try {
+			const [v, l] = await Promise.all([get_game_versions(), get_loaders()])
 			gameVersions.value = v
-		})
-		.catch(handleError)
-	get_loaders()
-		.then((v) => {
-			loaders.value = v
-		})
-		.catch(handleError)
+			loaders.value = l
+		} catch {
+			setTimeout(loadTags, 400)
+		}
+	}
+
+	void loadTags()
 
 	provideTags({ gameVersions, loaders })
 }

@@ -1956,12 +1956,8 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 				</span>
 			</div>
 		</Transition>
-		<Suspense>
-			<AppSettingsModal ref="appSettingsModal" />
-		</Suspense>
-		<Suspense>
-			<ModrinthAccountRequiredModal ref="modrinthLoginModal" :request-auth="requestModrinthAuth" />
-		</Suspense>
+		<AppSettingsModal ref="appSettingsModal" />
+		<ModrinthAccountRequiredModal ref="modrinthLoginModal" :request-auth="requestModrinthAuth" />
 		<CreationFlowModal
 			ref="installationModal"
 			type="instance"
@@ -2202,7 +2198,7 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 				{{ formatMessage(messages.authUnreachableBody) }}
 			</Admonition>
 
-			<RouterView v-else v-slot="{ Component }">
+			<RouterView v-slot="{ Component }">
 				<template v-if="Component">
 					<Suspense @pending="onSuspensePending" @resolve="onSuspenseResolve">
 						<KeepAlive include="LibraryPage">
