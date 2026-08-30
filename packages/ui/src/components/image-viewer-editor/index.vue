@@ -258,23 +258,23 @@ defineExpose({ show, edit, hide, next, previous, markSavedAndView })
 		>
 			<header
 				v-if="activeItem.title || activeItem.description"
-				class="absolute inset-x-6 top-[calc(var(--top-bar-height,3rem)_+_1.5rem)] z-10 min-w-0"
+				class="pointer-events-none absolute inset-x-0 top-4 z-20 flex justify-center px-4"
 				@click.stop
 			>
-				<div class="w-fit min-w-0 max-w-full">
+				<div
+					class="pointer-events-auto flex flex-col items-center max-w-[min(44rem,90vw)] px-5 py-2.5 rounded-2xl bg-surface-2/90 border border-solid border-surface-4 shadow-2xl backdrop-blur-md text-center"
+				>
 					<h2
 						v-if="activeItem.title"
 						ref="titleElement"
-						class="m-0 max-w-[min(42rem,70vw)] truncate text-base font-semibold leading-snug transition-colors duration-200 ease-out"
-						:class="titleContrast === 'dark' ? 'text-gray-950' : 'text-white'"
+						class="m-0 max-w-full truncate text-sm font-semibold leading-snug text-contrast"
 					>
 						{{ activeItem.title }}
 					</h2>
 					<p
 						v-if="activeItem.description"
 						ref="descriptionElement"
-						class="mb-0 mt-1 max-w-[min(42rem,70vw)] truncate text-xs leading-snug opacity-70 transition-colors duration-200 ease-out"
-						:class="descriptionContrast === 'dark' ? 'text-gray-950' : 'text-white'"
+						class="mb-0 mt-0.5 max-w-full truncate text-xs leading-snug text-secondary"
 					>
 						{{ activeItem.description }}
 					</p>
