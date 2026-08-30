@@ -1956,8 +1956,12 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 				</span>
 			</div>
 		</Transition>
-		<AppSettingsModal ref="appSettingsModal" />
-		<ModrinthAccountRequiredModal ref="modrinthLoginModal" :request-auth="requestModrinthAuth" />
+		<Suspense>
+			<AppSettingsModal ref="appSettingsModal" />
+		</Suspense>
+		<Suspense>
+			<ModrinthAccountRequiredModal ref="modrinthLoginModal" :request-auth="requestModrinthAuth" />
+		</Suspense>
 		<CreationFlowModal
 			ref="installationModal"
 			type="instance"
@@ -2201,7 +2205,9 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 			<RouterView v-slot="{ Component }">
 				<template v-if="Component">
 					<KeepAlive include="LibraryPage">
-						<component :is="Component" :key="route.fullPath"></component>
+						<Suspense @pending="onSuspensePending" @resolve="onSuspenseResolve">
+							<component :is="Component" :key="route.fullPath"></component>
+						</Suspense>
 					</KeepAlive>
 				</template>
 			</RouterView>

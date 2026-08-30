@@ -106,7 +106,7 @@ function openPageContextMenu(event: MouseEvent) {
 </script>
 
 <template>
-	<WelcomeScreen v-if="instances.length === 0 && !hasCreatedInstance" />
+	<WelcomeScreen v-if="instances.length === 0" />
 	<div
 		v-else
 		data-library-page-background

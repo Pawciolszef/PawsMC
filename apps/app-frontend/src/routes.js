@@ -8,7 +8,7 @@ import * as Project from '@/pages/project'
 /**
  * Configures application routing. Add page to pages/index and then add to route table here.
  */
-export default new createRouter({
+export default createRouter({
 	history: createWebHistory(),
 	routes: [
 		{
