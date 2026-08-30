@@ -194,11 +194,6 @@ const messages = defineMessages({
 		id: 'friends.no-friends-match',
 		defaultMessage: `No friends matching ''{query}''`,
 	},
-	signInToAddFriends: {
-		id: 'friends.sign-in-to-add-friends',
-		defaultMessage:
-			"<link>Sign in to a Modrinth account</link> to add friends and see what they're playing!",
-	},
 	addFriendsToShare: {
 		id: 'friends.add-friends-to-share',
 		defaultMessage: "<link>Add friends</link> to see what they're playing!",
@@ -334,25 +329,14 @@ const messages = defineMessages({
 			</div>
 		</template>
 		<template v-else-if="sortedFriends.length === 0">
-			<div class="text-sm">
-				<div v-if="!userCredentials">
-					<IntlFormatted :message-id="messages.signInToAddFriends">
-						<template #link="{ children }">
-							<span class="font-semibold text-brand cursor-pointer" @click="signIn">
-								<component :is="() => children" />
-							</span>
-						</template>
-					</IntlFormatted>
-				</div>
-				<div v-else>
-					<IntlFormatted :message-id="messages.addFriendsToShare">
-						<template #link="{ children }">
-							<span class="font-semibold text-brand cursor-pointer" @click="addFriendModal.show">
-								<component :is="() => children" />
-							</span>
-						</template>
-					</IntlFormatted>
-				</div>
+			<div v-if="userCredentials" class="text-sm">
+				<IntlFormatted :message-id="messages.addFriendsToShare">
+					<template #link="{ children }">
+						<span class="font-semibold text-brand cursor-pointer" @click="addFriendModal.show">
+							<component :is="() => children" />
+						</span>
+					</template>
+				</IntlFormatted>
 			</div>
 		</template>
 		<template v-else>

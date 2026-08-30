@@ -359,7 +359,7 @@ const {
 		creationGeneratedIcon.value?.path === iconPath ? creationGeneratedIcon.value.config : null,
 )
 const { hasLoggedIntoMinecraft, hasLoggedIntoModrinth, showChecklist } = onboardingChecklist
-const showFriendsList = ref(true)
+const showFriendsList = computed(() => Boolean(credentials.value))
 
 async function randomizeCreationIcon() {
 	const generated = await creationIconEditorModal.value?.randomizeAndSave()
