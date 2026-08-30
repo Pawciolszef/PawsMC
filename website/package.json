@@ -1,0 +1,10 @@
+{
+  "name": "pawsmc-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Official landing page for PawsMC Minecraft Launcher",
+  "scripts": {
+    "dev": "npx -y serve -p 8093 .",
+    "start": "npx -y serve -p 8093 ."
+  }
+}

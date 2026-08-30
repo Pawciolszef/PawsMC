@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="blue">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawsMC — The Cleanest, Fastest Minecraft Launcher</title>
+    <meta name="description" content="PawsMC is a lightweight, 100% ad-free, and debloated Minecraft launcher with custom Discord RPC, dynamic themes, and instant quick play.">
+    <meta name="keywords" content="Minecraft Launcher, PawsMC, Minecraft Mods, Fabric Launcher, Forge, Ad-Free Minecraft, Debloated Launcher">
+    <meta name="author" content="Pawciol / PawsMC Team">
+    <meta name="theme-color" content="#0d111d">
+
+    <!-- Open Graph / Discord -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pawsmc.pawciol.eu/">
+    <meta property="og:title" content="PawsMC — The Cleanest, Fastest Minecraft Launcher">
+    <meta property="og:description" content="Experience Minecraft without the bloat. 100% ad-free, zero telemetry, dynamic themes, and blazing-fast performance.">
+    <meta property="og:image" content="assets/logo.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/icon-128.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Glow Effects -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand">
+                <img src="assets/logo.png" alt="PawsMC Logo" class="brand-logo">
+                <span class="brand-name">Paws<span class="brand-accent">MC</span></span>
+            </a>
+
+            <div class="nav-links" id="navLinks">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#themes" class="nav-link">Themes</a>
+                <a href="#comparison" class="nav-link">Why PawsMC?</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </div>
+
+            <div class="nav-actions">
+                <a href="https://github.com/Pawciolszef/PawsMC" target="_blank" rel="noopener noreferrer" class="btn-github" aria-label="GitHub Repository">
+                    <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    <span class="github-text">GitHub</span>
+                </a>
+                <a href="#download" class="btn btn-primary btn-sm">Download</a>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container hero-container">
+            <div class="hero-badge animate-float">
+                <span class="badge-dot"></span>
+                <span class="badge-text" id="releaseTagBadge">v1.0.0 is now live!</span>
+            </div>
+
+            <h1 class="hero-title">
+                Minecraft, <br>
+                <span class="gradient-text">Without the Bloat.</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                A lightweight, 100% ad-free, and hyper-customizable launcher built for players who demand pure performance, zero background telemetry, and a stunning modern design.
+            </p>
+
+            <div class="hero-cta" id="download">
+                <div class="download-group">
+                    <a id="primaryDownloadBtn" href="https://github.com/Pawciolszef/PawsMC/releases/latest/download/PawsMC-1.0.0-Setup.exe" class="btn btn-primary btn-hero">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        <div class="btn-text-block">
+                            <span class="btn-title">Download for Windows</span>
+                            <span class="btn-desc" id="installerSubtext">Installer (.exe) • 64-bit</span>
+                        </div>
+                    </a>
+
+                    <div class="download-dropdown-wrapper">
+                        <button class="btn btn-primary btn-dropdown-toggle" id="downloadDropdownBtn" aria-label="More download options">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </button>
+                        <div class="download-dropdown-menu" id="downloadDropdownMenu">
+                            <a id="portableDownloadLink" href="https://github.com/Pawciolszef/PawsMC/releases/latest/download/PawsMC-v1.0.0-windows-x64.zip" class="dropdown-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                                <div>
+                                    <span class="dropdown-title">Portable Zip</span>
+                                    <span class="dropdown-sub">Standalone executable (No installation)</span>
+                                </div>
+                            </a>
+                            <a href="https://github.com/Pawciolszef/PawsMC/releases" target="_blank" rel="noopener noreferrer" class="dropdown-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                <div>
+                                    <span class="dropdown-title">All GitHub Releases</span>
+                                    <span class="dropdown-sub">Changelogs & older versions</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-badges">
+                    <span class="pill-check"><span>✓</span> 100% Free & Open Source</span>
+                    <span class="pill-check"><span>✓</span> Zero Ads & Trackers</span>
+                    <span class="pill-check"><span>✓</span> Fabric, Forge, NeoForge, Quilt</span>
+                </div>
+            </div>
+
+            <!-- Interactive Mockup & Live Theme Switcher -->
+            <div class="mockup-wrapper" id="themes">
+                <div class="mockup-header-bar">
+                    <div class="mockup-header-title">
+                        <span class="sparkle">✨</span> Try interactive launcher themes live:
+                    </div>
+                    <div class="theme-switcher-pills">
+                        <button class="theme-pill active" data-set-theme="blue" style="--pill-color: #38bdf8;">
+                            <span class="theme-dot"></span> Baby Blue
+                        </button>
+                        <button class="theme-pill" data-set-theme="pink" style="--pill-color: #f472b6;">
+                            <span class="theme-dot"></span> Sakura Pink
+                        </button>
+                        <button class="theme-pill" data-set-theme="purple" style="--pill-color: #a78bfa;">
+                            <span class="theme-dot"></span> Cyber Violet
+                        </button>
+                        <button class="theme-pill" data-set-theme="mint" style="--pill-color: #34d399;">
+                            <span class="theme-dot"></span> Mint Green
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mockup-window glass-card">
+                    <div class="mockup-titlebar">
+                        <div class="mockup-dots">
+                            <span class="dot close"></span>
+                            <span class="dot min"></span>
+                            <span class="dot max"></span>
+                        </div>
+                        <div class="mockup-window-title">PawsMC Launcher</div>
+                        <div class="mockup-status-tag">● Ready to Play</div>
+                    </div>
+
+                    <div class="mockup-body">
+                        <!-- Left Sidebar -->
+                        <div class="mockup-sidebar">
+                            <div class="mockup-nav-icon active">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg>
+                            </div>
+                            <div class="mockup-nav-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+                            </div>
+                            <div class="mockup-nav-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                            </div>
+                            <div class="mockup-nav-icon mt-auto">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="13" r="3"/></svg>
+                            </div>
+                        </div>
+
+                        <!-- Main Content Area -->
+                        <div class="mockup-content">
+                            <!-- Hero Jump-in Card -->
+                            <div class="mockup-jump-in">
+                                <div class="jump-in-left">
+                                    <div class="jump-in-icon">FO</div>
+                                    <div>
+                                        <div class="jump-in-title">Fabulously Optimized</div>
+                                        <div class="jump-in-sub">Fabric 1.21.4 • Active Profile</div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-mockup-play">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg>
+                                    Play
+                                </button>
+                            </div>
+
+                            <!-- Instances Grid -->
+                            <div class="mockup-section-header">
+                                <span>Installed Instances (4)</span>
+                                <span class="mockup-accent-link">+ New Instance</span>
+                            </div>
+
+                            <div class="mockup-grid">
+                                <div class="mockup-card active-card">
+                                    <div class="card-icon bg-cyan">FO</div>
+                                    <div class="card-info">
+                                        <div class="card-title">Fabulously Optimized</div>
+                                        <div class="card-desc">Fabric • 1.21.4</div>
+                                    </div>
+                                    <div class="card-action">▶</div>
+                                </div>
+                                <div class="mockup-card">
+                                    <div class="card-icon bg-emerald">CM</div>
+                                    <div class="card-info">
+                                        <div class="card-title">Cobblemon Official</div>
+                                        <div class="card-desc">NeoForge • 1.21.1</div>
+                                    </div>
+                                    <div class="card-action">▶</div>
+                                </div>
+                                <div class="mockup-card">
+                                    <div class="card-icon bg-violet">AOF</div>
+                                    <div class="card-info">
+                                        <div class="card-title">All of Fabric 7</div>
+                                        <div class="card-desc">Fabric • 1.20.4</div>
+                                    </div>
+                                    <div class="card-action">▶</div>
+                                </div>
+                                <div class="mockup-card">
+                                    <div class="card-icon bg-amber">VN</div>
+                                    <div class="card-info">
+                                        <div class="card-title">Pure Vanilla 1.21.5</div>
+                                        <div class="card-desc">Vanilla • Release</div>
+                                    </div>
+                                    <div class="card-action">▶</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Sidebar (Quick Play + Gallery) -->
+                        <div class="mockup-right-bar">
+                            <div class="mockup-widget-card">
+                                <div class="widget-label">Playing as</div>
+                                <div class="user-chip">
+                                    <div class="user-avatar"></div>
+                                    <div>
+                                        <div class="user-name">Player</div>
+                                        <div class="user-sub">Microsoft Account</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mockup-widget-card">
+                                <div class="widget-label">⚡ Quick Play</div>
+                                <div class="quick-play-row">
+                                    <div class="qp-icon">FO</div>
+                                    <div class="qp-title">Fabulously Opt...</div>
+                                    <button class="qp-btn">Play</button>
+                                </div>
+                            </div>
+
+                            <div class="mockup-widget-card">
+                                <div class="widget-label">🖼️ Quick Gallery</div>
+                                <div class="qp-gallery-img">
+                                    <span class="gallery-badge">Latest Screenshot</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Bento Grid -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Features</span>
+                <h2 class="section-title">Engineered for Perfection.</h2>
+                <p class="section-desc">Everything you love about modern Minecraft launcher technology, with zero unnecessary distractions.</p>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Card 1: 0 Ads -->
+                <div class="bento-card bento-card-large glass-card">
+                    <div class="card-badge">Zero Compromise</div>
+                    <div class="bento-icon-box bg-red-glow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+                    </div>
+                    <h3 class="bento-title">100% Ad-Free Experience</h3>
+                    <p class="bento-desc">No sponsored banner ads, no promotional popups, and no third-party store upsells. Just a clean, beautiful window dedicated to your game.</p>
+                </div>
+
+                <!-- Card 2: Zero Telemetry -->
+                <div class="bento-card glass-card">
+                    <div class="bento-icon-box bg-cyan-glow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3 class="bento-title">Zero Telemetry & Tracking</h3>
+                    <p class="bento-desc">We never track your gameplay, collect hardware telemetry, or send your IP address anywhere. Your gaming privacy is guaranteed.</p>
+                </div>
+
+                <!-- Card 3: Discord RPC -->
+                <div class="bento-card glass-card">
+                    <div class="bento-icon-box bg-violet-glow">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                    </div>
+                    <h3 class="bento-title">Discord Rich Presence</h3>
+                    <p class="bento-desc">Show off what you're playing with real-time modpack name and in-game timers directly in your Discord status.</p>
+                </div>
+
+                <!-- Card 4: 4 Dynamic Themes -->
+                <div class="bento-card glass-card">
+                    <div class="bento-icon-box bg-pink-glow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m14 12-8.5 8.5a2.12 2.12 0 0 1-3-3L11 9"/><path d="M16 16l6-6"/><path d="m18 8 2-2a2.83 2.83 0 1 0-4-4l-2 2"/></svg>
+                    </div>
+                    <h3 class="bento-title">4 Dynamic Accent Themes</h3>
+                    <p class="bento-desc">Choose between Baby Blue, Sakura Pink, Cyber Violet, and Mint Green to personalize your launcher aesthetic.</p>
+                </div>
+
+                <!-- Card 5: Quick Play & Gallery -->
+                <div class="bento-card bento-card-large glass-card">
+                    <div class="card-badge">Instant Access</div>
+                    <div class="bento-icon-box bg-emerald-glow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <h3 class="bento-title">1-Click Quick Play & Native Gallery</h3>
+                    <p class="bento-desc">Jump into your favorite instance directly from the right sidebar with 1 click. Inspect your latest screenshots and copy them to clipboard with zero effort.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="comparison-section" id="comparison">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Comparison</span>
+                <h2 class="section-title">Why Players Choose PawsMC</h2>
+                <p class="section-desc">See how PawsMC stacks up against other Minecraft launchers.</p>
+            </div>
+
+            <div class="table-wrapper glass-card">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th class="highlight-col">PawsMC</th>
+                            <th>Default Launcher</th>
+                            <th>CurseForge App</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>100% Ad-Free</strong></td>
+                            <td class="highlight-col"><span class="check">✓ Always</span></td>
+                            <td><span class="cross">✕ Promotes store</span></td>
+                            <td><span class="cross">✕ Video & banner ads</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zero Telemetry / Trackers</strong></td>
+                            <td class="highlight-col"><span class="check">✓ 0% Telemetry</span></td>
+                            <td><span class="cross">✕ Microsoft telemetry</span></td>
+                            <td><span class="cross">✕ Overwolf telemetry</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Discord Rich Presence</strong></td>
+                            <td class="highlight-col"><span class="check">✓ Built-in & Customizable</span></td>
+                            <td><span class="cross">✕ None</span></td>
+                            <td><span class="partial">△ Basic</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dynamic Accent Themes</strong></td>
+                            <td class="highlight-col"><span class="check">✓ 4 Neon Accent Themes</span></td>
+                            <td><span class="cross">✕ Fixed UI</span></td>
+                            <td><span class="cross">✕ Fixed UI</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Resource Usage & Speed</strong></td>
+                            <td class="highlight-col"><span class="check">✓ Lightweight Native Rust</span></td>
+                            <td><span class="partial">△ Moderate</span></td>
+                            <td><span class="cross">✕ Heavy Electron</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Open Source (GPL-3.0)</strong></td>
+                            <td class="highlight-col"><span class="check">✓ 100% Open Source</span></td>
+                            <td><span class="cross">✕ Proprietary</span></td>
+                            <td><span class="cross">✕ Proprietary</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">FAQ</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item glass-card">
+                    <button class="faq-question">
+                        <span>Is PawsMC free and safe to use?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! PawsMC is 100% free and open-source under the GPL-3.0 license. The entire source code is available on GitHub for anyone to audit and verify.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card">
+                    <button class="faq-question">
+                        <span>How do Minecraft accounts work?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You log in securely using official Microsoft OAuth authentication directly through Microsoft's servers. PawsMC never sees or stores your password.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card">
+                    <button class="faq-question">
+                        <span>What mod loaders are supported?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>PawsMC supports Fabric, NeoForge, Forge, and Quilt out of the box. You can install individual mods, resource packs, and shaders or whole modpacks with 1 click.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card">
+                    <button class="faq-question">
+                        <span>What is the difference between Installer and Portable?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The <strong>Setup Installer (.exe)</strong> automatically sets up shortcuts in your Start Menu, Desktop, and registers file associations. The <strong>Portable (.zip)</strong> is a standalone binary that can be run anywhere (e.g. from a USB stick) without installing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-card glass-card">
+                <div class="cta-glow"></div>
+                <h2 class="cta-title">Upgrade Your Minecraft Experience Today.</h2>
+                <p class="cta-desc">Join players switching to the fastest, cleanly designed Minecraft launcher.</p>
+                <div class="cta-actions">
+                    <a href="https://github.com/Pawciolszef/PawsMC/releases/latest/download/PawsMC-1.0.0-Setup.exe" class="btn btn-primary btn-hero">
+                        Download PawsMC for Windows
+                    </a>
+                    <a href="https://github.com/Pawciolszef/PawsMC" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                        View GitHub Repo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-left">
+                <div class="brand">
+                    <img src="assets/logo.png" alt="PawsMC Logo" class="brand-logo">
+                    <span class="brand-name">Paws<span class="brand-accent">MC</span></span>
+                </div>
+                <p class="footer-tagline">The clean, debloated, ad-free Minecraft launcher.</p>
+            </div>
+
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Project</h4>
+                    <a href="https://github.com/Pawciolszef/PawsMC">GitHub</a>
+                    <a href="https://github.com/Pawciolszef/PawsMC/releases">Releases</a>
+                    <a href="https://pawsmc.pawciol.eu">Official Website</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <a href="https://github.com/Pawciolszef/PawsMC/blob/main/LICENSE">GPL-3.0 License</a>
+                    <a href="https://github.com/Pawciolszef/PawsMC/blob/main/COPYING.md">Trademark Notice</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-container">
+                <p>© 2026 PawsMC. Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</p>
+                <p>Designed with 💖 by Pawciol</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>

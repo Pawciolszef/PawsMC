@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  pawsmc-website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pawsmc-website
+    restart: unless-stopped
+    ports:
+      - "8093:80"
+    environment:
+      - TZ=Europe/Warsaw
