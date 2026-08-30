@@ -473,3 +473,88 @@ html {
 
 	--brand-gradient-strong-bg: #3a3b38;
 }
+
+/* ==========================================================================
+   PawsMC Accent Themes (Pink / Sakura, Purple / Cyber Violet, Mint Green)
+   ========================================================================== */
+
+/* 🌸 Sakura Pink */
+.accent-pink {
+	--color-brand: #f472b6;
+	--color-brand-highlight: rgba(244, 114, 182, 0.22);
+	--color-brand-shadow: rgba(244, 114, 182, 0.7);
+	--brand-gradient-bg: linear-gradient(0deg, rgba(80, 15, 50, 0.35) 0%, rgba(244, 114, 182, 0.15) 100%);
+	--brand-gradient-strong-bg: linear-gradient(270deg, #150810 10%, #2a0e20 100%);
+	--brand-gradient-border: rgba(249, 168, 212, 0.2);
+	--brand-gradient-fade-out-color: linear-gradient(to bottom, rgba(21, 8, 16, 0), #150810 80%);
+	--loading-bar-gradient: linear-gradient(to right, #f472b6 0%, #fbcfe8 100%);
+	--color-button-bg-selected: var(--color-brand-highlight);
+	--color-button-text-selected: var(--color-brand);
+}
+
+.light-mode.accent-pink,
+.light.accent-pink {
+	--color-brand: #db2777;
+	--color-brand-highlight: rgba(219, 39, 119, 0.18);
+	--color-brand-shadow: rgba(219, 39, 119, 0.7);
+	--brand-gradient-bg: linear-gradient(0deg, rgba(219, 39, 119, 0.08) 0%, rgba(244, 114, 182, 0.12) 100%);
+	--brand-gradient-strong-bg: linear-gradient(270deg, #fff1f6 10%, #fde2ed 100%);
+	--brand-gradient-button: rgba(219, 39, 119, 0.08);
+	--brand-gradient-border: rgba(219, 39, 119, 0.18);
+	--brand-gradient-fade-out-color: linear-gradient(to bottom, rgba(255, 241, 246, 0), #fff1f6 80%);
+	--loading-bar-gradient: linear-gradient(to right, #db2777 0%, #f472b6 100%);
+}
+
+/* 💜 Cyber Violet */
+.accent-purple {
+	--color-brand: #c084fc;
+	--color-brand-highlight: rgba(192, 132, 252, 0.22);
+	--color-brand-shadow: rgba(192, 132, 252, 0.7);
+	--brand-gradient-bg: linear-gradient(0deg, rgba(50, 15, 80, 0.35) 0%, rgba(192, 132, 252, 0.15) 100%);
+	--brand-gradient-strong-bg: linear-gradient(270deg, #100818 10%, #200e30 100%);
+	--brand-gradient-border: rgba(216, 180, 254, 0.2);
+	--brand-gradient-fade-out-color: linear-gradient(to bottom, rgba(16, 8, 24, 0), #100818 80%);
+	--loading-bar-gradient: linear-gradient(to right, #c084fc 0%, #e9d5ff 100%);
+	--color-button-bg-selected: var(--color-brand-highlight);
+	--color-button-text-selected: var(--color-brand);
+}
+
+.light-mode.accent-purple,
+.light.accent-purple {
+	--color-brand: #9333ea;
+	--color-brand-highlight: rgba(147, 51, 234, 0.18);
+	--color-brand-shadow: rgba(147, 51, 234, 0.7);
+	--brand-gradient-bg: linear-gradient(0deg, rgba(147, 51, 234, 0.08) 0%, rgba(192, 132, 252, 0.12) 100%);
+	--brand-gradient-strong-bg: linear-gradient(270deg, #faf5ff 10%, #f3e8ff 100%);
+	--brand-gradient-button: rgba(147, 51, 234, 0.08);
+	--brand-gradient-border: rgba(147, 51, 234, 0.18);
+	--brand-gradient-fade-out-color: linear-gradient(to bottom, rgba(250, 245, 255, 0), #faf5ff 80%);
+	--loading-bar-gradient: linear-gradient(to right, #9333ea 0%, #c084fc 100%);
+}
+
+/* 🌿 Mint Green */
+.accent-mint {
+	--color-brand: #2dd4bf;
+	--color-brand-highlight: rgba(45, 212, 191, 0.22);
+	--color-brand-shadow: rgba(45, 212, 191, 0.7);
+	--brand-gradient-bg: linear-gradient(0deg, rgba(15, 65, 55, 0.35) 0%, rgba(45, 212, 191, 0.15) 100%);
+	--brand-gradient-strong-bg: linear-gradient(270deg, #061311 10%, #0d2824 100%);
+	--brand-gradient-border: rgba(153, 246, 228, 0.2);
+	--brand-gradient-fade-out-color: linear-gradient(to bottom, rgba(6, 19, 17, 0), #061311 80%);
+	--loading-bar-gradient: linear-gradient(to right, #2dd4bf 0%, #99f6e4 100%);
+	--color-button-bg-selected: var(--color-brand-highlight);
+	--color-button-text-selected: var(--color-brand);
+}
+
+.light-mode.accent-mint,
+.light.accent-mint {
+	--color-brand: #0d9488;
+	--color-brand-highlight: rgba(13, 148, 136, 0.18);
+	--color-brand-shadow: rgba(13, 148, 136, 0.7);
+	--brand-gradient-bg: linear-gradient(0deg, rgba(13, 148, 136, 0.08) 0%, rgba(45, 212, 191, 0.12) 100%);
+	--brand-gradient-strong-bg: linear-gradient(270deg, #f0fdfa 10%, #ccfbf1 100%);
+	--brand-gradient-button: rgba(13, 148, 136, 0.08);
+	--brand-gradient-border: rgba(13, 148, 136, 0.18);
+	--brand-gradient-fade-out-color: linear-gradient(to bottom, rgba(240, 253, 250, 0), #f0fdfa 80%);
+	--loading-bar-gradient: linear-gradient(to right, #0d9488 0%, #2dd4bf 100%);
+}

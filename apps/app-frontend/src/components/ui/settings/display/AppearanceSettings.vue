@@ -8,6 +8,7 @@ import {
 } from '@modrinth/ui'
 import { computed, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
+import AccentColorSelector from './AccentColorSelector.vue'
 import { type ColorTheme, isDarkTheme, useTheme } from '@/composables/use-theme.ts'
 import { type AppSettings, get, set } from '@/helpers/settings.ts'
 import { getOS } from '@/helpers/utils'
@@ -158,5 +159,8 @@ provideAppearanceSettings({
 </script>
 
 <template>
-	<AppearanceSettingsLayout />
+	<div>
+		<AppearanceSettingsLayout />
+		<AccentColorSelector />
+	</div>
 </template>
