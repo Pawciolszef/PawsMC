@@ -85,7 +85,6 @@ import MinecraftRequiredModal from '@/components/ui/minecraft-required-modal/Min
 import AppSettingsModal from '@/components/ui/modal/AppSettingsModal.vue'
 import InstallToPlayModal from '@/components/ui/modal/InstallToPlayModal.vue'
 import ModpackAlreadyInstalledModal from '@/components/ui/modal/ModpackAlreadyInstalledModal.vue'
-import ModrinthAccountRequiredModal from '@/components/ui/modal/ModrinthAccountRequiredModal.vue'
 import UpdateToPlayModal from '@/components/ui/modal/UpdateToPlayModal.vue'
 import NavButton from '@/components/ui/NavButton.vue'
 import NewIconEditorNotification from '@/components/ui/new-icon-editor-notification/index.vue'
@@ -1868,9 +1867,6 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 			</div>
 		</Transition>
 		<AppSettingsModal ref="appSettingsModal" />
-		<Suspense>
-			<ModrinthAccountRequiredModal ref="modrinthLoginModal" :request-auth="requestModrinthAuth" />
-		</Suspense>
 		<CreationFlowModal
 			ref="installationModal"
 			type="instance"
@@ -1943,69 +1939,6 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 			>
 				<SettingsIcon />
 			</NavButton>
-			<span v-tooltip.right="profileButtonTooltip" class="inline-flex">
-				<IconButton
-					v-if="credentials === undefined"
-					type="quiet"
-					size="xl"
-					disabled
-					class="pointer-events-none"
-					:label="formatMessage(messages.loadingProfile)"
-				>
-					<SpinnerIcon class="animate-spin" />
-				</IconButton>
-				<TeleportOverflowMenu
-					v-else-if="credentials?.user"
-					type="quiet"
-					size="xl"
-					:label="formatMessage(messages.modrinthAccount)"
-					:options="modrinthAccountMenuOptions"
-					placement="right-end"
-					:distance="4"
-					class="brightness-100 hover:!brightness-100 focus-visible:!brightness-100"
-				>
-					<Avatar
-						:src="credentials?.user?.avatar_url"
-						alt=""
-						size="32px"
-						circle
-						no-shadow
-						class="pointer-events-none !size-8"
-					/>
-					<template
-						v-for="account in accountSwitcherAccounts"
-						:key="account.user_id"
-						#[account.optionId]
-					>
-						<Avatar :src="account.user.avatar_url" size="1.25rem" aria-hidden="true" circle />
-						{{ account.user.username }}
-						<UserRoleIcon :role="account.user.role" />
-					</template>
-				</TeleportOverflowMenu>
-				<TeleportOverflowMenu
-					v-else-if="accountSwitcherAccounts.length > 0"
-					type="quiet"
-					size="xl"
-					:label="formatMessage(messages.signInToModrinthAccount)"
-					:options="accountSwitcherOptions"
-					placement="right-end"
-					:distance="4"
-				>
-					<LogInIcon class="!text-brand" />
-					<template
-						v-for="account in accountSwitcherAccounts"
-						:key="account.user_id"
-						#[account.optionId]
-					>
-						<Avatar :src="account.user.avatar_url" size="1.25rem" aria-hidden="true" circle />
-						{{ account.user.username }}
-						<UserRoleIcon :role="account.user.role" />
-					</template>
-				</TeleportOverflowMenu>
-				<NavButton v-else :to="() => requestSignIn()">
-					<LogInIcon class="text-brand" />
-				</NavButton>
-			</span>
 		</div>
 		<div data-tauri-drag-region class="app-grid-statusbar bg-bg-raised h-[--top-bar-height] flex">
 			<div data-tauri-drag-region class="flex min-w-0 flex-1 items-center overflow-hidden p-2">
@@ -2141,18 +2074,6 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 						</h3>
 						<suspense>
 							<AccountsCard ref="accounts" />
-						</suspense>
-					</div>
-					<div
-						v-show="showFriendsList"
-						class="p-4 border-0 border-b-[1px] border-[--brand-gradient-border] border-solid"
-					>
-						<suspense>
-							<FriendsList
-								ref="friendsList"
-								:credentials="credentials"
-								:sign-in="() => requestSignIn()"
-							/>
 						</suspense>
 					</div>
 					<QuickLaunchCard />

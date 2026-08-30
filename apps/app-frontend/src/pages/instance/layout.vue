@@ -512,14 +512,6 @@ const tabs = computed(() => {
 		})
 	}
 
-	if (showShareTab.value) {
-		instanceTabs.push({
-			label: formatMessage(messages.shareTab),
-			href: `${basePath.value}/share`,
-			icon: UserPlusIcon,
-		})
-	}
-
 	return instanceTabs
 })
 

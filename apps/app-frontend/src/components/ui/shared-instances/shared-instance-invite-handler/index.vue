@@ -1,5 +1,4 @@
 <template>
-	<ModrinthAccountRequiredModal ref="accountRequiredModal" :request-auth="requestAuth" />
 	<SharedInstanceInstallModal ref="installModal" />
 	<SharedInstanceAlreadyInstalledModal
 		ref="alreadyInstalledModal"
@@ -13,7 +12,6 @@
 import { injectAuth } from '@modrinth/ui'
 import { nextTick, ref } from 'vue'
 
-import ModrinthAccountRequiredModal from '@/components/ui/modal/ModrinthAccountRequiredModal.vue'
 import SharedInstanceInstallModal from '@/components/ui/shared-instances/shared-instance-install-modal/index.vue'
 import SharedInstanceAlreadyInstalledModal from '@/components/ui/shared-instances/SharedInstanceAlreadyInstalledModal.vue'
 import type { ModrinthAuthFlow } from '@/helpers/mr_auth'
@@ -24,7 +22,7 @@ import { useSharedInstanceInviteHandler } from './use-shared-instance-invite-han
 const auth = injectAuth()
 const installModal = ref<InstanceType<typeof SharedInstanceInstallModal>>()
 const alreadyInstalledModal = ref<InstanceType<typeof SharedInstanceAlreadyInstalledModal>>()
-const accountRequiredModal = ref<InstanceType<typeof ModrinthAccountRequiredModal>>()
+const accountRequiredModal = ref<any>()
 const {
 	handleNotification,
 	installFromInviteId,
