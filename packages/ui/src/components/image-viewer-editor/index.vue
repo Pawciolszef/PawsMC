@@ -250,7 +250,7 @@ defineExpose({ show, edit, hide, next, previous, markSavedAndView })
 	<Teleport to="body">
 		<div
 			v-if="activeItem"
-			class="fixed inset-0 z-[110] overflow-hidden bg-black/95 text-white"
+			class="fixed inset-0 z-[110] overflow-hidden bg-black/80 backdrop-blur-sm text-contrast"
 			role="dialog"
 			aria-modal="true"
 			:aria-label="activeItem.title || activeItem.alt"
@@ -262,19 +262,19 @@ defineExpose({ show, edit, hide, next, previous, markSavedAndView })
 				@click.stop
 			>
 				<div
-					class="pointer-events-auto flex flex-col items-center max-w-[min(44rem,90vw)] px-5 py-2.5 rounded-2xl bg-neutral-900/90 border border-solid border-white/15 shadow-2xl backdrop-blur-md text-center"
+					class="pointer-events-auto flex flex-col items-center max-w-[min(44rem,90vw)] px-5 py-2.5 rounded-2xl bg-surface-2 border border-solid border-surface-4 shadow-2xl backdrop-blur-md text-center"
 				>
 					<h2
 						v-if="activeItem.title"
 						ref="titleElement"
-						class="m-0 max-w-full truncate text-sm font-semibold leading-snug text-white"
+						class="m-0 max-w-full truncate text-sm font-semibold leading-snug text-contrast"
 					>
 						{{ activeItem.title }}
 					</h2>
 					<p
 						v-if="activeItem.description"
 						ref="descriptionElement"
-						class="mb-0 mt-0.5 max-w-full truncate text-xs leading-snug text-white/70"
+						class="mb-0 mt-0.5 max-w-full truncate text-xs leading-snug text-secondary"
 					>
 						{{ activeItem.description }}
 					</p>

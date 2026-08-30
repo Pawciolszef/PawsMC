@@ -501,7 +501,7 @@ defineExpose({ getTextContrast, markSaved })
 	</template>
 	<div
 		v-else
-		class="absolute bottom-6 left-1/2 z-10 flex max-w-[calc(100%_-_3rem)] -translate-x-1/2 items-center gap-2 rounded-[20px] border border-solid border-white/10 bg-surface-3 p-2 shadow-[0_1rem_3rem_rgb(0_0_0_/_32%)]"
+		class="absolute bottom-6 left-1/2 z-10 flex max-w-[calc(100%_-_3rem)] -translate-x-1/2 items-center gap-2 rounded-[20px] border border-solid border-surface-4 bg-surface-2 p-2 shadow-2xl backdrop-blur-md"
 		@click.stop
 	>
 		<div v-if="count > 1" class="flex items-center gap-2">
@@ -509,17 +509,17 @@ defineExpose({ getTextContrast, markSaved })
 				<LeftArrowIcon aria-hidden="true" />
 			</IconButton>
 			<span
-				class="flex min-w-14 justify-center gap-1 text-base font-semibold leading-5 tabular-nums text-white/50"
+				class="flex min-w-14 justify-center gap-1 text-base font-semibold leading-5 tabular-nums text-secondary"
 				aria-live="polite"
 			>
-				<strong class="font-semibold text-white">{{ index + 1 }}</strong>
+				<strong class="font-semibold text-contrast">{{ index + 1 }}</strong>
 				<span>/ {{ count }}</span>
 			</span>
 			<IconButton :label="formatMessage(messages.next)" type="quiet" @click="emit('next')">
 				<RightArrowIcon aria-hidden="true" />
 			</IconButton>
 		</div>
-		<div v-if="count > 1" class="h-6 w-px bg-white/10" />
+		<div v-if="count > 1" class="h-6 w-px bg-surface-4" />
 		<div class="flex items-center gap-2">
 			<IconButton
 				v-tooltip="formatMessage(messages.zoomOut)"
@@ -533,7 +533,7 @@ defineExpose({ getTextContrast, markSaved })
 			<Button
 				v-tooltip="formatMessage(messages.fitToWorkspace)"
 				type="quiet"
-				class="w-16 px-2 tabular-nums text-white/60"
+				class="w-16 px-2 tabular-nums text-secondary"
 				@click="resetView"
 			>
 				{{ viewZoomPercent }}%
@@ -548,7 +548,7 @@ defineExpose({ getTextContrast, markSaved })
 				<ZoomInIcon aria-hidden="true" />
 			</IconButton>
 		</div>
-		<div class="h-6 w-px bg-white/10" />
+		<div class="h-6 w-px bg-surface-4" />
 		<IconButton
 			v-if="canEdit"
 			v-tooltip="formatMessage(messages.edit)"
