@@ -24,7 +24,7 @@ import {
 } from '@modrinth/ui'
 import { getVersion } from '@tauri-apps/api/app'
 import { platform as getOsPlatform, version as getOsVersion } from '@tauri-apps/plugin-os'
-import { computed, provide, ref, watch } from 'vue'
+import { computed, onMounted, provide, ref, watch } from 'vue'
 
 import PrivacySettings from '@/components/ui/settings/account/PrivacySettings.vue'
 import ProfileSettings from '@/components/ui/settings/account/ProfileSettings.vue'
@@ -210,8 +210,8 @@ function saveUnsavedChanges(): void {
 	void unsavedChangesController.value?.save()
 }
 
-function show() {
-	modal.value?.show()
+function show(event?: MouseEvent) {
+	modal.value?.show(event)
 }
 
 function showProfile(): void {
@@ -249,38 +249,30 @@ const { progress, version: downloadingVersion } = injectAppUpdateDownloadProgres
 const version = ref('')
 const osPlatform = ref('')
 const osVersion = ref('')
-const settings = ref<any>(null)
 
 async function loadSettings() {
 	try {
 		version.value = await getVersion()
 		osPlatform.value = getOsPlatform()
 		osVersion.value = getOsVersion()
-		settings.value = await get()
-	} catch {
-		setTimeout(loadSettings, 400)
-	}
+	} catch {}
 }
 
-void loadSettings()
+onMounted(() => {
+	void loadSettings()
+})
 
-watch(
-	settings,
-	async () => {
-		if (settings.value) {
-			await set(settings.value)
-		}
-	},
-	{ deep: true },
-)
-
-function devModeCount() {
+async function devModeCount() {
 	devModeCounter.value++
 	if (devModeCounter.value > 5) {
 		const selectedTab = modal.value ? availableTabs.value[modal.value.selectedTab] : undefined
 
 		appSettings.devMode = !appSettings.devMode
-		settings.value.developer_mode = !!appSettings.devMode
+		const currentSettings = await get().catch(() => null)
+		if (currentSettings) {
+			currentSettings.developer_mode = !!appSettings.devMode
+			await set(currentSettings).catch(() => {})
+		}
 		devModeCounter.value = 0
 
 		if (modal.value) {
