@@ -4,7 +4,7 @@
 
 ### A clean, debloated, and ad-free Minecraft launcher
 
-[![GitHub License](https://img.shields.io/github/license/Pawciolszef/PawsMC?style=for-the-badge&color=76b9e8)](LICENSE)
+[![GitHub License](https://img.shields.io/github/license/Pawciolszef/PawsMC?style=for-the-badge&color=76b9e8)]([LICENSE](https://github.com/Pawciolszef/PawsMC/blob/main/LICENSE))
 [![GitHub Release](https://img.shields.io/github/v/release/Pawciolszef/PawsMC?style=for-the-badge&color=76b9e8)](https://github.com/Pawciolszef/PawsMC/releases)
 [![Build Status](https://img.shields.io/badge/Build-Passing-76b9e8?style=for-the-badge)](https://github.com/Pawciolszef/PawsMC)
 
