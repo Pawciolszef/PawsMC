@@ -138,6 +138,13 @@ fn main() {
 
     let tauri_context = tauri::generate_context!();
 
+    let async_runtime = tokio::runtime::Builder::new_multi_thread()
+        .enable_all()
+        .thread_stack_size(8 * 1024 * 1024)
+        .build()
+        .expect("Failed to build Tokio runtime with 8MB stack size");
+    tauri::async_runtime::set(async_runtime.handle().clone());
+
     let _log_guard = theseus::start_logger(&tauri_context.config().identifier);
 
     tracing::info!("Initialized tracing subscriber. Loading PawsMC!");

@@ -294,6 +294,12 @@ wildcard_dependencies = "warn"
 [profile.dev.package.sqlx-macros]
 opt-level = 3
 
+[profile.dev.package.theseus]
+opt-level = 1
+
+[profile.dev.package.pawsmc_gui]
+opt-level = 1
+
 # Optimize for speed and reduce size on release builds
 [profile.release]
 opt-level = "s"  # Optimize for binary size

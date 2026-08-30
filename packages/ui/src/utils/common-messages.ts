@@ -230,7 +230,7 @@ export const commonMessages = defineMessages({
 	},
 	openInModrinthButton: {
 		id: 'button.open-in-modrinth',
-		defaultMessage: 'Open in Modrinth',
+		defaultMessage: 'Open in PawsMC',
 	},
 	orLabel: {
 		id: 'label.or',
