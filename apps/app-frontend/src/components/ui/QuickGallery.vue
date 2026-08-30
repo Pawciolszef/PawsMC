@@ -3,12 +3,10 @@ import {
 	ArrowUpRightIcon,
 	CheckIcon,
 	ClipboardCopyIcon,
-	FolderOpenIcon,
 	ImagesIcon,
 	ShirtIcon,
-	SparklesIcon,
 } from '@modrinth/assets'
-import { Button, IconButton, useFormatDateTime, useVIntl } from '@modrinth/ui'
+import { IconButton, useFormatDateTime } from '@modrinth/ui'
 import { convertFileSrc } from '@tauri-apps/api/core'
 import { readFile } from '@tauri-apps/plugin-fs'
 import { onMounted, ref } from 'vue'
@@ -21,7 +19,6 @@ import {
 	type InstanceScreenshot,
 	type ScreenshotKey,
 } from '@/helpers/instance'
-import { showAppDbBackupsFolder } from '@/helpers/utils'
 
 const router = useRouter()
 const latestScreenshot = ref<InstanceScreenshot | null>(null)
@@ -31,15 +28,24 @@ let copyTimeout: number | undefined
 
 const formatTime = useFormatDateTime({ dateStyle: 'short', timeStyle: 'short' })
 
+function getScreenshotDate(s: InstanceScreenshot): Date {
+	if (s.modified_at) {
+		return new Date(s.modified_at > 1e11 ? s.modified_at : s.modified_at * 1000)
+	}
+	if (s.created_at) {
+		return new Date(s.created_at)
+	}
+	return new Date()
+}
+
 async function fetchLatestScreenshot() {
 	try {
 		loading.value = true
 		const all = await list_all_screenshots()
 		if (all && all.length > 0) {
-			// Sort by modified/created descending
 			const sorted = all.slice().sort((a, b) => {
-				const timeA = new Date(a.modified ?? a.created).getTime()
-				const timeB = new Date(b.modified ?? b.created).getTime()
+				const timeA = getScreenshotDate(a).getTime()
+				const timeB = getScreenshotDate(b).getTime()
 				return timeB - timeA
 			})
 			latestScreenshot.value = sorted[0] ?? null
@@ -74,9 +80,7 @@ async function handleOpen() {
 	if (!latestScreenshot.value) return
 	const key: ScreenshotKey = {
 		instance_id: latestScreenshot.value.instance_id,
-		id: latestScreenshot.value.id,
-		path: latestScreenshot.value.path,
-		name: latestScreenshot.value.name,
+		file_name: latestScreenshot.value.file_name,
 	}
 	try {
 		await open_screenshot(key)
@@ -119,8 +123,8 @@ useAppEvent('instance', fetchLatestScreenshot)
 		>
 			<div class="aspect-video w-full bg-black/40 overflow-hidden relative cursor-pointer" @click="handleOpen">
 				<img
-					:src="convertFileSrc(latestScreenshot.path)"
-					:alt="latestScreenshot.name"
+					:src="latestScreenshot.url || convertFileSrc(latestScreenshot.path)"
+					:alt="latestScreenshot.file_name"
 					class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
 					loading="lazy"
 				/>
@@ -128,7 +132,7 @@ useAppEvent('instance', fetchLatestScreenshot)
 					class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2 justify-between"
 				>
 					<span class="text-[11px] text-white/90 truncate max-w-[140px] font-medium">
-						{{ latestScreenshot.name }}
+						{{ latestScreenshot.file_name }}
 					</span>
 					<div class="flex items-center gap-1">
 						<IconButton
@@ -145,9 +149,9 @@ useAppEvent('instance', fetchLatestScreenshot)
 				</div>
 			</div>
 			<div class="px-2.5 py-1.5 flex items-center justify-between text-xs text-secondary bg-surface-1">
-				<span class="truncate">{{ latestScreenshot.instance_id }}</span>
+				<span class="truncate">{{ latestScreenshot.instance_name || latestScreenshot.instance_id }}</span>
 				<span class="shrink-0 text-[10px] opacity-75">
-					{{ formatTime(new Date(latestScreenshot.modified ?? latestScreenshot.created)) }}
+					{{ formatTime(getScreenshotDate(latestScreenshot)) }}
 				</span>
 			</div>
 		</div>

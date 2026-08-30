@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ClockIcon, FolderOpenIcon, LayersIcon, PlayIcon, SparklesIcon, TimerIcon } from '@modrinth/assets'
+import { ClockIcon, LayersIcon, TimerIcon } from '@modrinth/assets'
 import dayjs from 'dayjs'
 import { computed } from 'vue'
 
@@ -39,7 +39,6 @@ const todayPlaytimeSeconds = computed(() => {
 	const today = dayjs().startOf('day')
 	return props.instances.reduce((sum, inst) => {
 		if (inst.last_played && dayjs(inst.last_played).isAfter(today)) {
-			// Recent session playtime for today
 			return sum + (inst.recent_time_played || 0)
 		}
 		return sum
@@ -51,11 +50,6 @@ const totalInstancesCount = computed(() => props.instances.length)
 const installedInstancesCount = computed(
 	() => props.instances.filter((i) => i.install_stage === 'installed').length,
 )
-
-const activeInstancesToday = computed(() => {
-	const today = dayjs().startOf('day')
-	return props.instances.filter((i) => i.last_played && dayjs(i.last_played).isAfter(today)).length
-})
 </script>
 
 <template>
@@ -82,14 +76,9 @@ const activeInstancesToday = computed(() => {
 			</div>
 			<div class="flex flex-col min-w-0">
 				<span class="text-xs text-secondary font-medium uppercase tracking-wider">Played Today</span>
-				<div class="flex items-center gap-1.5">
-					<span class="text-base font-bold text-contrast truncate">
-						{{ formatDuration(todayPlaytimeSeconds) }}
-					</span>
-					<span v-if="activeInstancesToday > 0" class="text-[11px] text-brand font-medium">
-						({{ activeInstancesToday }} active)
-					</span>
-				</div>
+				<span class="text-base font-bold text-contrast truncate">
+					{{ formatDuration(todayPlaytimeSeconds) }}
+				</span>
 			</div>
 		</div>
 
