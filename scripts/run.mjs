@@ -16,7 +16,7 @@ const scriptPath = join(__dirname, `${scriptName}.ts`)
 
 const child = spawn(
 	process.execPath,
-	['--disable-warning=MODULE_TYPELESS_PACKAGE_JSON', scriptPath, ...args],
+	['--experimental-strip-types', '--disable-warning=MODULE_TYPELESS_PACKAGE_JSON', scriptPath, ...args],
 	{
 		stdio: 'inherit',
 	},
