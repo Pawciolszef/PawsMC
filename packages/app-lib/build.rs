@@ -46,9 +46,37 @@ fn build_java_jars() {
     )
     .unwrap();
 
+    let mut cmd = Command::new(gradle_path);
+
+    #[cfg(target_os = "windows")]
+    {
+        // Auto-detect JDK if JAVA_HOME is not set or points to Java <= 8
+        if env::var("JAVA_HOME").is_err() {
+            let possible_jdks = [
+                r"C:\Program Files\Java\jdk-25",
+                r"C:\Program Files\Java\jdk-21",
+                r"C:\Program Files\Java\jdk-17",
+                r"C:\Program Files\Eclipse Adoptium",
+            ];
+            for jdk in possible_jdks {
+                if std::path::Path::new(jdk).exists() {
+                    cmd.env("JAVA_HOME", jdk);
+                    break;
+                }
+            }
+        }
+
+        // Ensure safe ASCII GRADLE_USER_HOME to prevent classloader crashes on non-ASCII usernames
+        if env::var("GRADLE_USER_HOME").is_err() {
+            let safe_gradle_home = out_dir.join("gradle_home");
+            let _ = fs::create_dir_all(&safe_gradle_home);
+            cmd.env("GRADLE_USER_HOME", safe_gradle_home);
+        }
+    }
+
     let mut build_dir_str = OsString::from("-Dorg.gradle.project.buildDir=");
     build_dir_str.push(out_dir.join("java"));
-    let exit_status = Command::new(gradle_path)
+    let exit_status = cmd
         .arg(build_dir_str)
         .arg("build")
         .arg("--no-daemon")
