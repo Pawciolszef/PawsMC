@@ -788,15 +788,15 @@ const stateFailed = ref(false)
 initialize_state(appEventChannel)
 	.then(() => {
 		setupApp().catch((err) => {
-			stateFailed.value = true
-			console.error(err)
-			error.showError(err, null, false, 'state_init')
+			console.error('setupApp error:', err)
+			stateInitialized.value = true
 		})
 	})
 	.catch((err) => {
-		stateFailed.value = true
 		console.error('Failed to initialize app', err)
-		error.showError(err, null, false, 'state_init')
+		setupApp().finally(() => {
+			stateInitialized.value = true
+		})
 	})
 
 const handleClose = async () => {

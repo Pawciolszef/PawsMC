@@ -30,18 +30,20 @@ async fn initialize_state(
     events: tauri::ipc::Channel<tauri::ipc::InvokeResponseBody>,
 ) -> api::Result<()> {
     tracing::info!("Initializing app event state...");
-    theseus::EventState::init(app.clone(), events).await?;
+    if let Err(e) = theseus::EventState::init(app.clone(), events).await {
+        tracing::warn!("EventState init warning: {e}");
+    }
 
     tracing::info!("Initializing app state...");
-    State::init(app.config().identifier.clone()).await?;
+    if let Err(e) = State::init(app.config().identifier.clone()).await {
+        tracing::warn!("State init warning: {e}");
+    }
 
-    let state = State::get().await?;
-    app.asset_protocol_scope()
-        .allow_directory(state.directories.caches_dir(), true)?;
-    app.asset_protocol_scope()
-        .allow_directory(state.directories.caches_dir().join("icons"), true)?;
-    app.fs_scope()
-        .allow_directory(state.directories.instances_dir(), true)?;
+    if let Ok(state) = State::get().await {
+        let _ = app.asset_protocol_scope().allow_directory(state.directories.caches_dir(), true);
+        let _ = app.asset_protocol_scope().allow_directory(state.directories.caches_dir().join("icons"), true);
+        let _ = app.fs_scope().allow_directory(state.directories.instances_dir(), true);
+    }
 
     Ok(())
 }
