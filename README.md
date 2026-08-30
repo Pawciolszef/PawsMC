@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🐾 PawsMC Launcher
+#  PawsMC Launcher
 
 ### A clean, debloated, and ad-free Minecraft launcher
 
@@ -25,7 +25,7 @@
 
 ## ✨ What Makes PawsMC Different?
 
-| Feature | Official Modrinth App | 🐾 PawsMC Launcher |
+| Feature | Official Modrinth App |  PawsMC Launcher |
 | :--- | :---: | :---: |
 | **Advertisements** | Included (Sidebar/Popups) | 🚫 **Completely Removed** |
 | **Telemetry & Analytics** | Enabled (PostHog / Sentry) | 🛡️ **Disabled & Stripped** |
@@ -102,3 +102,6 @@ Contributions, bug reports, and suggestions are warmly welcome!
 
 - **PawsMC** is licensed under the [GNU General Public License v3.0 (GPL-3.0)](LICENSE).
 - Based on the open-source **[Modrinth Launcher (Theseus)](https://github.com/modrinth/code)** created by Rinth, Inc. and its wonderful open-source contributors.
+
+> [!IMPORTANT]
+> ## Some parts of PAWSMC were created by AI.
