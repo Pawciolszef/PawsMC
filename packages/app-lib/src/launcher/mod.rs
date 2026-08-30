@@ -1131,9 +1131,10 @@ pub async fn launch_minecraft(
         }
     }
 
+    let start_timestamp = chrono::Utc::now().timestamp();
     let _ = state
         .discord_rpc
-        .set_activity(&format!("Playing {}", instance.name), true)
+        .set_instance_activity(&instance.name, Some(start_timestamp), true)
         .await;
 
     let _ = state
