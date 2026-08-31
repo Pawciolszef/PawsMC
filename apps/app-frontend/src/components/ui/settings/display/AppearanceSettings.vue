@@ -182,8 +182,9 @@ provideAppearanceSettings({
 </script>
 
 <template>
-	<div>
-		<AppearanceSettingsLayout />
-		<AccentColorSelector v-model="current.accentColor" />
-	</div>
+	<AppearanceSettingsLayout>
+		<template #after-theme>
+			<AccentColorSelector v-model="current.accentColor" />
+		</template>
+	</AppearanceSettingsLayout>
 </template>

@@ -55,9 +55,8 @@ function selectAccent(opt: AccentOption) {
 					/>
 				</div>
 
-				<div class="flex items-center gap-1.5 font-semibold text-sm text-contrast">
-					<span>{{ opt.emoji }}</span>
-					<span>{{ opt.name }}</span>
+				<div class="font-semibold text-sm text-contrast">
+					{{ opt.name }}
 				</div>
 
 				<!-- Active pill badge -->

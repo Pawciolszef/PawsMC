@@ -34,6 +34,14 @@ const themeLabels = defineMessages({
 		id: 'settings.display.theme.oled',
 		defaultMessage: 'OLED',
 	},
+	gray: {
+		id: 'settings.display.theme.gray',
+		defaultMessage: 'Gray',
+	},
+	green: {
+		id: 'settings.display.theme.green',
+		defaultMessage: 'Green',
+	},
 	retro: {
 		id: 'settings.display.theme.retro',
 		defaultMessage: 'Retro',
@@ -122,6 +130,14 @@ function getPreviewClass(option: T): string {
 
 		&.oled-mode {
 			@extend .oled-mode;
+		}
+
+		&.gray-mode {
+			@extend .gray-mode;
+		}
+
+		&.green-mode {
+			@extend .green-mode;
 		}
 
 		&.retro-mode {
