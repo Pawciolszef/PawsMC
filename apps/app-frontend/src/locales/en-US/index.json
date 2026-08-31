@@ -1647,7 +1647,7 @@
     "message": "Purge the app cache?"
   },
   "app.settings.resource-management.app-cache.description": {
-    "message": "Clear cached data and download it again from Modrinth. The app may load more slowly until the cache is rebuilt."
+    "message": "Clear cached data and download it again. The app may load more slowly until the cache is rebuilt."
   },
   "app.settings.resource-management.app-cache.purge": {
     "message": "Purge cache"
