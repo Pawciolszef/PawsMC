@@ -1,6 +1,6 @@
 [package]
 name = "pawsmc_gui"
-version = "1.0.0"
+version = "1.0.1"
 edition.workspace = true
 description = "PawsMC - The ultimate Minecraft launcher experience"
 repository = "https://github.com/Pawciolszef/PawsMC"
