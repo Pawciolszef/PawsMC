@@ -1,9 +1,9 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import { ImportIcon, PlusIcon } from '@modrinth/assets'
 import { Button, defineMessages, IntlFormatted, useVIntl } from '@modrinth/ui'
 import { inject, onMounted, onUnmounted, ref } from 'vue'
 
-import modrinthSocialIcon from '../../assets/welcome/modrinth-social-icon.png'
+import pawsmcLogo from '../../assets/welcome/pawsmc-logo.png'
 
 const showCreationModal = inject<() => void>('showCreationModal')
 const showImportModal = inject<() => void>('showImportModal')
@@ -12,7 +12,7 @@ const { formatMessage } = useVIntl()
 
 const messages = defineMessages({
 	welcomeTitle: {
-		id: 'app.welcome-screen.title',
+		id: 'app.welcome-screen.title-paws',
 		defaultMessage: 'Welcome to PawsMC',
 	},
 	welcomeDescription: {
@@ -88,12 +88,12 @@ onUnmounted(() => {
 					class="dot-pattern pointer-events-none absolute left-1/2 -top-52 -z-10 h-[29.875rem] w-[min(25.9375rem,80vw)] -translate-x-1/2 rounded-2xl [@media(max-height:700px)]:h-[23rem]"
 					aria-hidden="true"
 				/>
-				<div class="size-[6.25rem]">
-					<img :src="modrinthSocialIcon" alt="" class="pointer-events-none size-full" />
+				<div class="size-[6.25rem] rounded-2xl overflow-hidden shadow-md">
+					<img :src="pawsmcLogo" alt="PawsMC Logo" class="pointer-events-none size-full object-cover rounded-2xl" />
 				</div>
 				<div class="flex flex-col items-center gap-2">
 					<h1 class="m-0 flex items-center gap-2 text-2xl font-semibold leading-8 text-contrast">
-						{{ formatMessage(messages.welcomeTitle) }}
+						Welcome to PawsMC
 					</h1>
 					<p class="m-0 text-center text-base leading-6 text-primary">
 						{{ formatMessage(messages.welcomeDescription) }}
