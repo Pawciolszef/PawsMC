@@ -30,6 +30,8 @@ type AppearanceSettingsState = {
 	nativeDecorations: boolean
 	accentColor: StandardAccent
 	customAccentHex: string
+	bgTheme: string
+	customBgHex: string
 }
 
 function getAppearanceSettingsState(settings: AppSettings): AppearanceSettingsState {
@@ -40,6 +42,8 @@ function getAppearanceSettingsState(settings: AppSettings): AppearanceSettingsSt
 		nativeDecorations: settings.native_decorations,
 		accentColor: accent.savedAccent.value,
 		customAccentHex: accent.savedCustomHex.value,
+		bgTheme: accent.savedBgTheme.value,
+		customBgHex: accent.savedCustomBgHex.value,
 	}
 }
 
@@ -74,8 +78,8 @@ const { saved, current, changes, saving, hasChanges, reset, save } = useSavable(
 		theme.syncAcrossDevices = value.syncAcrossDevices
 		theme.advancedRendering = value.advancedRendering
 
-		// Commit accent changes
-		accent.commit(value.accentColor, value.customAccentHex)
+		// Commit all accent and background customizations
+		accent.commit(value.accentColor, value.customAccentHex, value.bgTheme, value.customBgHex)
 	},
 )
 
@@ -118,14 +122,20 @@ watch(
 	[
 		() => current.value.accentColor,
 		() => current.value.customAccentHex,
+		() => current.value.bgTheme,
+		() => current.value.customBgHex,
 		() => saved.value.accentColor,
 		() => saved.value.customAccentHex,
+		() => saved.value.bgTheme,
+		() => saved.value.customBgHex,
 	],
-	([currAccent, currHex, savedAccent, savedHex]) => {
-		if (currAccent !== savedAccent || (currAccent === 'custom' && currHex !== savedHex)) {
-			accent.setPreview(currAccent, currHex)
+	([currAccent, currHex, currBg, currBgHex, savedAccent, savedHex, savedBg, savedBgHex]) => {
+		const isAccentChanged = currAccent !== savedAccent || (currAccent === 'custom' && currHex !== savedHex)
+		const isBgChanged = currBg !== savedBg || (currBg === 'custom-bg' && currBgHex !== savedBgHex)
+		if (isAccentChanged || isBgChanged) {
+			accent.setPreview(currAccent, currHex, currBg, currBgHex)
 		} else {
-			accent.setPreview(null)
+			accent.setPreview(null, null, null, null)
 		}
 	},
 	{ immediate: true },
@@ -147,7 +157,7 @@ onMounted(() => {
 		isSaving: () => saving.value,
 		reset: () => {
 			reset()
-			accent.setPreview(null)
+			accent.setPreview(null, null, null, null)
 		},
 		save: saveAppearanceSettings,
 	})
@@ -155,7 +165,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
 	theme.preview = null
-	accent.setPreview(null)
+	accent.setPreview(null, null, null, null)
 	settingsModal?.registerUnsavedChangesController(null)
 })
 
@@ -194,6 +204,8 @@ provideAppearanceSettings({
 		<AccentColorSelector
 			v-model="current.accentColor"
 			v-model:custom-hex="current.customAccentHex"
+			v-model:bg-theme="current.bgTheme"
+			v-model:custom-bg-hex="current.customBgHex"
 		/>
 	</div>
 </template>
