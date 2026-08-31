@@ -34,10 +34,6 @@ const themeLabels = defineMessages({
 		id: 'settings.display.theme.oled',
 		defaultMessage: 'OLED',
 	},
-	custom: {
-		id: 'settings.display.theme.custom',
-		defaultMessage: 'Custom RGB 🎨',
-	},
 	retro: {
 		id: 'settings.display.theme.retro',
 		defaultMessage: 'Retro',
@@ -99,7 +95,7 @@ function getPreviewClass(option: T): string {
 					aria-hidden="true"
 				/>
 				<MoonIcon
-					v-else-if="option === preferredDarkTheme && option !== 'custom'"
+					v-else-if="option === preferredDarkTheme"
 					v-tooltip="formatMessage(themeTooltips.preferredDark)"
 					class="theme-icon shrink-0"
 					aria-hidden="true"
@@ -130,10 +126,6 @@ function getPreviewClass(option: T): string {
 
 		&.retro-mode {
 			@extend .retro-mode;
-		}
-
-		&.custom-mode {
-			background-color: var(--surface-1);
 		}
 	}
 
