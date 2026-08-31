@@ -9,12 +9,14 @@ import {
 import { computed, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import AccentColorSelector from './AccentColorSelector.vue'
+import { useAccentColor, type StandardAccent } from '@/composables/use-accent-color'
 import { type ColorTheme, isDarkTheme, useTheme } from '@/composables/use-theme.ts'
 import { type AppSettings, get, set } from '@/helpers/settings.ts'
 import { getOS } from '@/helpers/utils'
 import { appSettingsModalContextKey } from '@/providers/app-settings-modal'
 
 const theme = useTheme()
+const accent = useAccentColor()
 const auth = injectAuth()
 const { updatePreferences } = injectUserPreferences()
 const settingsModal = inject(appSettingsModalContextKey, null)
@@ -26,6 +28,8 @@ type AppearanceSettingsState = {
 	syncAcrossDevices: boolean
 	advancedRendering: boolean
 	nativeDecorations: boolean
+	accentColor: StandardAccent
+	customAccentHex: string
 }
 
 function getAppearanceSettingsState(settings: AppSettings): AppearanceSettingsState {
@@ -34,6 +38,8 @@ function getAppearanceSettingsState(settings: AppSettings): AppearanceSettingsSt
 		syncAcrossDevices: settings.sync_theme_across_devices,
 		advancedRendering: settings.advanced_rendering,
 		nativeDecorations: settings.native_decorations,
+		accentColor: accent.savedAccent.value,
+		customAccentHex: accent.savedCustomHex.value,
 	}
 }
 
@@ -67,6 +73,9 @@ const { saved, current, changes, saving, hasChanges, reset, save } = useSavable(
 		theme.preferred = value.theme
 		theme.syncAcrossDevices = value.syncAcrossDevices
 		theme.advancedRendering = value.advancedRendering
+
+		// Commit accent changes
+		accent.commit(value.accentColor, value.customAccentHex)
 	},
 )
 
@@ -105,6 +114,23 @@ watch(
 	{ immediate: true },
 )
 
+watch(
+	[
+		() => current.value.accentColor,
+		() => current.value.customAccentHex,
+		() => saved.value.accentColor,
+		() => saved.value.customAccentHex,
+	],
+	([currAccent, currHex, savedAccent, savedHex]) => {
+		if (currAccent !== savedAccent || (currAccent === 'custom' && currHex !== savedHex)) {
+			accent.setPreview(currAccent, currHex)
+		} else {
+			accent.setPreview(null)
+		}
+	},
+	{ immediate: true },
+)
+
 async function saveAppearanceSettings(): Promise<void> {
 	try {
 		await save()
@@ -119,13 +145,17 @@ onMounted(() => {
 		getOriginal: () => saved.value,
 		getModified: () => changes.value,
 		isSaving: () => saving.value,
-		reset,
+		reset: () => {
+			reset()
+			accent.setPreview(null)
+		},
 		save: saveAppearanceSettings,
 	})
 })
 
 onBeforeUnmount(() => {
 	theme.preview = null
+	accent.setPreview(null)
 	settingsModal?.registerUnsavedChangesController(null)
 })
 
@@ -161,6 +191,9 @@ provideAppearanceSettings({
 <template>
 	<div>
 		<AppearanceSettingsLayout />
-		<AccentColorSelector />
+		<AccentColorSelector
+			v-model="current.accentColor"
+			v-model:custom-hex="current.customAccentHex"
+		/>
 	</div>
 </template>
