@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 export type AccentColor = 'blue' | 'pink' | 'purple' | 'mint'
 
@@ -60,28 +60,53 @@ function loadSavedAccent(): AccentColor {
 	return 'blue'
 }
 
-const currentAccent = ref<AccentColor>(loadSavedAccent())
+const savedAccent = ref<AccentColor>(loadSavedAccent())
+const previewAccent = ref<AccentColor | null>(null)
+
+const activeAccent = computed<AccentColor>(() => previewAccent.value ?? savedAccent.value)
 
 function applyAccentClass(accent: AccentColor) {
 	if (typeof document === 'undefined') return
 	const html = document.documentElement
-	html.classList.remove('accent-blue', 'accent-pink', 'accent-purple', 'accent-mint')
+
+	// Remove any inline surface variables that were previously set
+	html.style.removeProperty('--surface-1')
+	html.style.removeProperty('--surface-1-5')
+	html.style.removeProperty('--surface-2')
+	html.style.removeProperty('--surface-2-5')
+	html.style.removeProperty('--surface-3')
+	html.style.removeProperty('--surface-4')
+	html.style.removeProperty('--surface-5')
+	html.style.removeProperty('--color-bg')
+	html.style.removeProperty('--color-raised-bg')
+	html.style.removeProperty('--color-super-raised-bg')
+	html.style.removeProperty('--color-button-bg')
+	html.style.removeProperty('--color-scrollbar')
+	html.style.removeProperty('--color-divider')
+	html.style.removeProperty('--color-brand')
+	html.style.removeProperty('--color-brand-highlight')
+	html.style.removeProperty('--color-brand-shadow')
+	html.style.removeProperty('--brand-gradient-bg')
+	html.style.removeProperty('--brand-gradient-strong-bg')
+	html.style.removeProperty('--brand-gradient-border')
+	html.style.removeProperty('--brand-gradient-fade-out-color')
+	html.style.removeProperty('--loading-bar-gradient')
+	html.style.removeProperty('--color-button-bg-selected')
+	html.style.removeProperty('--color-button-text-selected')
+	html.style.removeProperty('--color-accent-contrast')
+
+	html.classList.remove('accent-blue', 'accent-pink', 'accent-purple', 'accent-mint', 'accent-orange', 'accent-yellow', 'accent-red', 'accent-green', 'accent-custom')
 	html.classList.add(`accent-${accent}`)
 }
 
 // Initial apply
 if (typeof document !== 'undefined') {
-	applyAccentClass(currentAccent.value)
+	applyAccentClass(activeAccent.value)
 }
 
 watch(
-	currentAccent,
+	activeAccent,
 	(val) => {
-		try {
-			localStorage.setItem(ACCENT_KEY, val)
-		} catch {
-			// ignored
-		}
 		applyAccentClass(val)
 	},
 	{ immediate: true },
@@ -89,10 +114,22 @@ watch(
 
 export function useAccentColor() {
 	return {
-		currentAccent,
+		savedAccent,
+		previewAccent,
+		activeAccent,
 		accentOptions: ACCENT_OPTIONS,
-		setAccent: (accent: AccentColor) => {
-			currentAccent.value = accent
+		setPreview: (accent: AccentColor | null) => {
+			previewAccent.value = accent
+		},
+		commit: (accent: AccentColor) => {
+			savedAccent.value = accent
+			previewAccent.value = null
+			try {
+				localStorage.setItem(ACCENT_KEY, accent)
+			} catch {
+				// ignored
+			}
+			applyAccentClass(savedAccent.value)
 		},
 	}
 }
