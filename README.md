@@ -1,6 +1,6 @@
 <div align="center">
 
-#  PawsMC Launcher
+# 🐾 PawsMC Launcher
 
 ### A clean, debloated, and ad-free Minecraft launcher
 
@@ -14,14 +14,14 @@
   <b>PawsMC</b> is a lightweight, privacy-respecting Minecraft launcher built for players who want a fast, beautiful, and distraction-free experience.
 </p>
 
-[**🌐 Visit Official Website**](https://pawsmc.pawciol.eu) • [**📥 Download Releases**](https://github.com/Pawciolszef/PawsMC/releases) • [**💬 Report an Issue**](https://github.com/Pawciolszef/PawsMC/issues)
+[**🌐 Visit Official Website**](https://pawsmc.pawciol.eu) • [**📦 Download Releases**](https://github.com/Pawciolszef/PawsMC/releases) • [**💬 Report an Issue**](https://github.com/Pawciolszef/PawsMC/issues)
 
 ---
 
 </div>
 
 > [!IMPORTANT]
-> ### 📌 Fork Attribution & Transparency
+> ### 📖 Fork Attribution & Transparency
 > **PawsMC is an independent, open-source fork of the official [Modrinth App (Theseus)](https://github.com/modrinth/theseus / [modrinth/code](https://github.com/modrinth/code)).**  
 > We have immense respect for the Modrinth team and their work. PawsMC builds upon the rock-solid foundation of the Modrinth App codebase while reshaping it into a fully debloated, ad-free, and community-first client.
 
@@ -31,39 +31,55 @@
 
 ---
 
-## ✨ What Makes PawsMC Different?
+## 🛡️ Windows SmartScreen / Antivirus Notice (False Positive)
+
+> [!WARNING]
+> ### ℹ️ Why Windows SmartScreen shows a warning on installation:
+> When downloading and running `PawsMC-Setup.exe`, Windows SmartScreen or Windows Defender might display a blue popup saying:
+> **"Windows protected your PC — Microsoft Defender SmartScreen prevented an unrecognized app from starting."**
+>
+> **This is a completely normal FALSE POSITIVE for newly compiled open-source projects.**
+> - **Why this happens:** Microsoft SmartScreen flags any executable that does not have an expensive commercial EV Code Signing Certificate ($400+/year) or has not yet built up download telemetry reputation in Microsoft's database.
+> - **Is it safe?** **Yes, 100%!** PawsMC is 100% open-source under GPL-3.0. You can inspect every line of source code or compile the binary yourself directly from GitHub.
+>
+> **How to install:**
+> 1. Click **"More info"** (*"Więcej informacji"*).
+> 2. Click **"Run anyway"** (*"Uruchom mimo to"*).
+
+---
+
+## ⚡ What Makes PawsMC Different?
 
 | Feature | Official Modrinth App | 🐾 PawsMC Launcher |
 | :--- | :---: | :---: |
 | **Advertisements** | Included (Sidebar/Popups) | 🚫 **Completely Removed** |
 | **Telemetry & Analytics** | Enabled (PostHog / Sentry) | 🛡️ **Disabled & Stripped** |
 | **Server Hosting Upsells** | Promoted in UI / Browse tab | 🧹 **Debloated & Cleaned** |
-| **UI Clutter & Checklists** | Onboarding naggings / News feed | 💎 **Minimal & Focused** |
-| **Accent Theme Palettes** | Single Green accent | 🎨 **4 Custom Accent Palettes** |
-| **Discord Rich Presence** | Generic Modrinth App | 👾 **Custom PawsMC + Live Playtime** |
+| **UI Clutter & Checklists** | Onboarding naggings / News feed | ✨ **Minimal & Focused** |
+| **Color Theme Options** | Dark, Light, OLED | 🎨 **Dark, Light, OLED, Gray, Green, System** |
+| **Accent Theme Palettes** | Single Green accent | 🌸 **4 Custom Accent Palettes** |
+| **Discord Rich Presence** | Generic Modrinth App | 🎮 **Custom PawsMC + [Download PawsMC] Button** |
 | **Quick Play & Gallery** | Not available | ⚡ **1-Click Launch & Screenshot Hub** |
-| **Mod & Modpack Support** | Full Modrinth Ecosystem | ⚡ **100% Fully Compatible** |
+| **Mod & Modpack Support** | Full Modrinth Ecosystem | 🔌 **100% Fully Compatible** |
 | **License** | GNU GPL v3.0 | 📜 **[GNU GPL v3.0](LICENSE)** |
 
 ---
 
-## 🚀 Key Features
+## ✨ Key Features
 
 - **🚫 100% Ad-Free Experience**: No ad windows, no sponsored blocks, no consent popups, no distraction.
 - **⚡ Supercharged Performance**: Stripped unnecessary background telemetry and background network polls for snappy UI and faster instance loading.
-- **🎨 Dynamic Accent Themes**: Switch effortlessly between 4 customizable accent color palettes:
-  - 🩵 **Baby Blue** *(Default PawsMC)*
-  - 🌸 **Sakura Pink** *(Pastel Pink)*
-  - 💜 **Cyber Violet** *(Neon Lavender)*
-  - 🌿 **Mint Green** *(Fresh Emerald)*
+- **🎨 Rich Theme & Appearance Customization**:
+  - **Color Themes:** Dark, Light, OLED (pure black), **Gray** (deep charcoal), **Green** (dark forest obsidian), and System sync.
+  - **PawsMC Accent Palettes:** Effortlessly switch between `Baby Blue`, `Sakura Pink`, `Cyber Violet`, and `Mint Green` with live preview and save confirmation.
 - **⚡ Quick Play Widget**: 1-click button in the sidebar to immediately launch or stop your most recently played instance.
 - **🖼️ Quick Gallery & Screenshot Lightbox**:
   - Live thumbnail of your latest Minecraft screenshot in the sidebar.
   - 1-click copy image directly to system clipboard.
   - Theme-adaptive full-screen lightbox viewer with smooth zoom and controls.
 - **📊 Playtime & Library Statistics**: Real-time stats bar on the home screen tracking total playtime across all instances, time played today, and installed instance counters.
-- **👾 Enhanced Discord Rich Presence**: Shows PawsMC mascot branding, the exact modpack or instance you are playing, and live elapsed in-game playtime.
-- **📦 Full Ecosystem Compatibility**:
+- **🎮 Enhanced Discord Rich Presence**: Shows PawsMC mascot branding, the exact modpack or instance you are playing, live elapsed playtime, and an interactive **`[Download PawsMC]`** button linking to the official website.
+- **🔌 Full Ecosystem Compatibility**:
   - Install and update any Modrinth modpack, mod, resource pack, shader, or datapack with one click.
   - Multi-version support for **Fabric, NeoForge, Forge, and Quilt**.
   - Integrated Minecraft Java Edition account management and skin changer.
@@ -96,19 +112,19 @@ pnpm install
 
 ```powershell
 # Run the desktop app with hot reload
-pnpm app:dev
+pnpm --filter @modrinth/app dev
 ```
 
 ### Build Production Binary
 
 ```powershell
-# Build the production executable
-pnpm app:build
+# Build the production executable installer
+pnpm --filter @modrinth/app build
 ```
 
 ---
 
-## 🛑 Contributing Policy
+## 🤝 Contributing Policy
 
 **PawsMC is a personal open-source project maintained solely by the author.**
 
