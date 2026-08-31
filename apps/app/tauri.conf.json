@@ -76,6 +76,12 @@
 				]
 			},
 			"mobile": []
+		},
+		"updater": {
+			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDM3OTQyRjVCMDU1NzEwNkMKUldSc0VGY0ZXeStVTnlzRG40YkNJY3lqTi8zSGJUWlppSUpyU09lR1ZrTkhJd1dTdkZINDhMeHAK",
+			"endpoints": [
+				"https://github.com/Pawciolszef/PawsMC/releases/latest/download/latest.json"
+			]
 		}
 	},
 	"app": {
