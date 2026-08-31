@@ -1,12 +1,12 @@
 /* ==========================================================================
-   PawsMC — Dark Pastel Minimalist Stylesheet
+   PawsMC — Dark Minimalist Baby Blue Stylesheet
    ========================================================================== */
 
 :root {
     --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-heading: 'Outfit', var(--font-main);
 
-    /* Dark Pastel Palette */
+    /* Dark Minimalist Palette */
     --bg-page: #0a0d14;
     --bg-card: #121622;
     --bg-card-hover: #181d2c;
@@ -17,12 +17,12 @@
     --text-muted: #94a3b8;
     --text-dim: #64748b;
 
-    /* Pastel Accents */
-    --pastel-pink: #f4a7bb;
-    --pastel-pink-hover: #f191aa;
-    --pastel-pink-subtle: rgba(244, 167, 187, 0.12);
-    --pastel-pink-border: rgba(244, 167, 187, 0.28);
-    --pink-gradient: linear-gradient(135deg, #f4a7bb 0%, #fda4af 50%, #fbcfe8 100%);
+    /* Baby Blue Pastel Accents */
+    --pastel-blue: #7dd3fc;
+    --pastel-blue-hover: #38bdf8;
+    --pastel-blue-subtle: rgba(125, 211, 252, 0.12);
+    --pastel-blue-border: rgba(125, 211, 252, 0.28);
+    --blue-gradient: linear-gradient(135deg, #7dd3fc 0%, #93c5fd 50%, #c4b5fd 100%);
 
     --radius-sm: 8px;
     --radius-md: 14px;
@@ -88,8 +88,8 @@ body {
     letter-spacing: -0.02em;
 }
 
-.brand-pink {
-    color: var(--pastel-pink);
+.brand-blue {
+    color: var(--pastel-blue);
 }
 
 .btn-github {
@@ -128,9 +128,9 @@ body {
     gap: 6px;
     padding: 5px 14px;
     border-radius: var(--radius-full);
-    background: var(--pastel-pink-subtle);
-    border: 1px solid var(--pastel-pink-border);
-    color: var(--pastel-pink);
+    background: var(--pastel-blue-subtle);
+    border: 1px solid var(--pastel-blue-border);
+    color: var(--pastel-blue);
     font-size: 0.82rem;
     font-weight: 700;
 }
@@ -143,8 +143,8 @@ body {
     letter-spacing: -0.03em;
 }
 
-.pink-gradient {
-    background: var(--pink-gradient);
+.blue-gradient {
+    background: var(--blue-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -164,13 +164,13 @@ body {
     margin-top: 4px;
 }
 
-.btn-pink {
+.btn-blue {
     display: inline-flex;
     align-items: center;
     gap: 10px;
     padding: 13px 26px;
     border-radius: var(--radius-md);
-    background: var(--pastel-pink);
+    background: var(--pastel-blue);
     color: #0a0d14;
     font-family: var(--font-main);
     font-weight: 700;
@@ -179,10 +179,10 @@ body {
     transition: var(--transition);
 }
 
-.btn-pink:hover {
-    background: var(--pastel-pink-hover);
+.btn-blue:hover {
+    background: var(--pastel-blue-hover);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(244, 167, 187, 0.25);
+    box-shadow: 0 8px 24px rgba(125, 211, 252, 0.3);
 }
 
 .btn-dark {
@@ -242,9 +242,9 @@ body {
     flex-shrink: 0;
 }
 
-.icon-pink { background: rgba(244, 167, 187, 0.15); }
-.icon-peach { background: rgba(251, 146, 60, 0.15); }
-.icon-purple { background: rgba(196, 181, 253, 0.15); }
+.icon-blue { background: rgba(125, 211, 252, 0.15); }
+.icon-sky { background: rgba(56, 189, 248, 0.15); }
+.icon-indigo { background: rgba(165, 180, 252, 0.15); }
 .icon-mint { background: rgba(167, 243, 208, 0.15); }
 
 .card-content strong {
@@ -276,7 +276,7 @@ body {
 }
 
 .footer a:hover {
-    color: var(--pastel-pink);
+    color: var(--pastel-blue);
 }
 
 /* Responsive */
@@ -287,7 +287,7 @@ body {
     .actions-row {
         flex-direction: column;
     }
-    .btn-pink, .btn-dark {
+    .btn-blue, .btn-dark {
         width: 100%;
         justify-content: center;
     }
