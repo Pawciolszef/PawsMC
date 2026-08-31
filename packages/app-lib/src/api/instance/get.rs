@@ -286,29 +286,20 @@ fn detect_loader_from_dir(dir: &Path) -> ModLoader {
 }
 
 fn detect_game_version_from_name_or_dir(name: &str, dir: &Path) -> Option<String> {
-    let re = regex::Regex::new(r"1\.\d+(\.\d+)?").ok()?;
-    if let Some(m) = re.find(name) {
-        let v = m.as_str();
-        if v == "1.8" {
-            return Some("1.8.9".to_string());
+    // 1. Try matching whole Minecraft version token like "1.21.5", "1.21.11", "1.8.9"
+    if let Ok(re) = regex::Regex::new(r"\b1\.\d{1,2}(?:\.\d{1,2})?\b") {
+        if let Some(m) = re.find(name) {
+            let v = m.as_str();
+            if v == "1.8" {
+                return Some("1.8.9".to_string());
+            }
+            return Some(v.to_string());
         }
-        return Some(v.to_string());
     }
 
-    let mods_dir = dir.join("mods");
-    if mods_dir.exists() {
-        if let Ok(entries) = std::fs::read_dir(&mods_dir) {
-            for entry in entries.flatten() {
-                let mname = entry.file_name().to_string_lossy().to_string();
-                if let Some(m) = re.find(&mname) {
-                    let v = m.as_str();
-                    if v == "1.8" {
-                        return Some("1.8.9".to_string());
-                    }
-                    return Some(v.to_string());
-                }
-            }
-        }
+    // 2. Fallback check
+    if name.contains("1.8") {
+        return Some("1.8.9".to_string());
     }
 
     None
