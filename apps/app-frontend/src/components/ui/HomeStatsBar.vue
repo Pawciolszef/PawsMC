@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ClockIcon, LayersIcon, TimerIcon } from '@modrinth/assets'
-import dayjs from 'dayjs'
 import { computed } from 'vue'
 
 import type { GameInstance } from '@/helpers/types'
@@ -34,15 +33,21 @@ const totalPlaytimeSeconds = computed(() => {
 	}, 0)
 })
 
-// Playtime today
-const todayPlaytimeSeconds = computed(() => {
-	const today = dayjs().startOf('day')
-	return props.instances.reduce((sum, inst) => {
-		if (inst.last_played && dayjs(inst.last_played).isAfter(today)) {
-			return sum + (inst.recent_time_played || 0)
+// Most played instance
+const mostPlayedInstance = computed(() => {
+	if (!props.instances || props.instances.length === 0) return null
+	let maxInst: GameInstance | null = null
+	let maxTime = 0
+
+	for (const inst of props.instances) {
+		const time = (inst.submitted_time_played || 0) + (inst.recent_time_played || 0)
+		if (time > maxTime) {
+			maxTime = time
+			maxInst = inst
 		}
-		return sum
-	}, 0)
+	}
+
+	return maxInst ? { name: maxInst.name, time: maxTime } : null
 })
 
 // Created and installed count
@@ -69,15 +74,23 @@ const installedInstancesCount = computed(
 			</div>
 		</div>
 
-		<!-- Playtime Today -->
+		<!-- Most Played -->
 		<div class="flex items-center gap-3 p-2.5 rounded-xl bg-surface-1/60 border border-surface-5/50">
 			<div class="w-10 h-10 rounded-xl bg-brand/10 text-brand flex items-center justify-center shrink-0">
 				<ClockIcon class="w-5 h-5" />
 			</div>
 			<div class="flex flex-col min-w-0">
-				<span class="text-xs text-secondary font-medium uppercase tracking-wider">Played Today</span>
-				<span class="text-base font-bold text-contrast truncate">
-					{{ formatDuration(todayPlaytimeSeconds) }}
+				<span class="text-xs text-secondary font-medium uppercase tracking-wider">Most Played</span>
+				<div v-if="mostPlayedInstance" class="flex items-center gap-1.5 min-w-0">
+					<span class="text-base font-bold text-contrast truncate">
+						{{ mostPlayedInstance.name }}
+					</span>
+					<span class="text-xs text-secondary shrink-0">
+						({{ formatDuration(mostPlayedInstance.time) }})
+					</span>
+				</div>
+				<span v-else class="text-base font-bold text-contrast">
+					None
 				</span>
 			</div>
 		</div>
