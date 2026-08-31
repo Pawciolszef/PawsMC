@@ -342,6 +342,36 @@ pub(crate) async fn watch_instance_folder(
         .insert(instance_path.to_string(), instance_id.to_string());
 }
 
+pub(crate) async fn unwatch_instance_folder(
+    instance_path: &str,
+    watcher: &FileWatcher,
+    dirs: &DirectoryInfo,
+) {
+    let full_instance_path = dirs.instances_dir().join(instance_path);
+
+    let mut to_unwatch = Vec::new();
+    for sub_path in ProjectType::iterator().map(|x| x.get_folder()).chain([
+        "crash-reports",
+        "saves",
+        "screenshots",
+        CONFIG_DIRECTORY,
+    ]) {
+        to_unwatch.push(full_instance_path.join(sub_path));
+    }
+
+    let mut debouncer = watcher.watcher.write().await;
+    for full_path in &to_unwatch {
+        let _ = debouncer.watcher().unwatch(full_path);
+    }
+    let _ = debouncer.watcher().unwatch(&full_instance_path);
+
+    watcher
+        .instance_ids
+        .write()
+        .await
+        .remove(instance_path);
+}
+
 fn crash_task(instance_id: String) {
     tokio::task::spawn(async move {
         let res = async {

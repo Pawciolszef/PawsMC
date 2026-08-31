@@ -187,8 +187,8 @@ async function removeInstance() {
 		game_version: instance.value.game_version,
 	})
 
-	await router.push({ path: '/' })
 	await remove(path).catch(handleError)
+	await router.push({ path: '/' })
 }
 
 const messages = defineMessages({

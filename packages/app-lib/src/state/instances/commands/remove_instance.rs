@@ -13,15 +13,30 @@ pub(crate) async fn remove_instance(
         })?;
     let _content_lock = state.lock_instance_content(instance_id).await;
     let _synced_options_lock = state.lock_synced_options().await;
+
+    // 1. Unwatch directory so Windows doesn't lock it
+    crate::state::instances::watcher::unwatch_instance_folder(
+        &instance.path,
+        &state.file_watcher,
+        &state.directories,
+    )
+    .await;
+
+    // 2. Remove physical directory from disk first
+    let path = state.directories.instances_dir().join(&instance.path);
+    if path.exists() {
+        if let Err(e) = io::remove_dir_all(&path).await {
+            tracing::warn!("Failed async remove_dir_all on {:?}: {e}, trying fallback", path);
+            let _ = std::fs::remove_dir_all(&path);
+        }
+    }
+
+    // 3. Remove generated instance files
     crate::api::instance::remove_generated_instance_files(instance_id, state)
         .await?;
 
+    // 4. Delete instance database row and release locks
     delete_instance_row_and_locks(&instance.id, state).await?;
-
-    let path = state.directories.instances_dir().join(&instance.path);
-    if path.exists() {
-        io::remove_dir_all(&path).await?;
-    }
 
     Ok(())
 }
