@@ -2,7 +2,7 @@ use std::sync::{Arc, atomic::AtomicBool};
 
 use discord_rich_presence::{
     DiscordIpc, DiscordIpcClient,
-    activity::{Activity, Assets, Timestamps},
+    activity::{Activity, Assets, Button, Timestamps},
 };
 use tokio::sync::RwLock;
 
@@ -79,7 +79,10 @@ impl DiscordGuard {
                     .large_text("PawsMC Launcher")
                     .small_image("logo")
                     .small_text("PawsMC"),
-            );
+            )
+            .buttons(vec![
+                Button::new("Download PawsMC", "https://pawsmc.pawciol.eu"),
+            ]);
 
         if let Some(start) = start_time_secs {
             activity = activity.timestamps(Timestamps::new().start(start));
@@ -128,11 +131,17 @@ impl DiscordGuard {
             return Ok(());
         }
 
-        let activity = Activity::new().details("PawsMC Launcher").state(msg).assets(
-            Assets::new()
-                .large_image("logo")
-                .large_text("PawsMC Launcher"),
-        );
+        let activity = Activity::new()
+            .details("PawsMC Launcher")
+            .state(msg)
+            .assets(
+                Assets::new()
+                    .large_image("logo")
+                    .large_text("PawsMC Launcher"),
+            )
+            .buttons(vec![
+                Button::new("Download PawsMC", "https://pawsmc.pawciol.eu"),
+            ]);
 
         let mut client = self.client.write().await;
         let res = client.set_activity(activity.clone());
