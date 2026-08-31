@@ -433,40 +433,6 @@ html {
 	--color-gradient-button-bg: linear-gradient(180deg, #122444 0%, #1c3664 100%);
 }
 
-.gray-mode,
-.gray,
-:root[data-theme='gray'] {
-	@extend .dark-mode;
-	--surface-1: #181716;
-	--surface-1-5: #1e1d1b;
-	--surface-2: #242321;
-	--surface-2-5: #2c2b28;
-	--surface-3: #33322e;
-	--surface-4: #3f3e3a;
-	--surface-5: #504e49;
-
-	--color-button-bg: var(--surface-4);
-	--color-scrollbar: var(--surface-5);
-	--color-divider: var(--surface-4);
-}
-
-.green-mode,
-.green,
-:root[data-theme='green'] {
-	@extend .dark-mode;
-	--surface-1: #051405;
-	--surface-1-5: #081c08;
-	--surface-2: #0c260c;
-	--surface-2-5: #103010;
-	--surface-3: #143c13;
-	--surface-4: #1a4d19;
-	--surface-5: #236622;
-
-	--color-button-bg: var(--surface-4);
-	--color-scrollbar: var(--surface-5);
-	--color-divider: var(--surface-4);
-}
-
 .retro-mode {
 	@extend .dark-mode;
 	--surface-1: #191917;
@@ -512,7 +478,7 @@ html {
    PawsMC Accent Themes (Pink / Sakura, Purple / Cyber Violet, Mint Green)
    ========================================================================== */
 
-/* Ä‘ĹşĹšÂ¸ Sakura Pink */
+/* 🌸 Sakura Pink */
 .accent-pink {
 	--color-brand: #f472b6;
 	--color-brand-highlight: rgba(244, 114, 182, 0.22);
@@ -539,7 +505,7 @@ html {
 	--loading-bar-gradient: linear-gradient(to right, #db2777 0%, #f472b6 100%);
 }
 
-/* Ä‘Ĺşâ€™Ĺ› Cyber Violet */
+/* 💜 Cyber Violet */
 .accent-purple {
 	--color-brand: #c084fc;
 	--color-brand-highlight: rgba(192, 132, 252, 0.22);
@@ -566,7 +532,7 @@ html {
 	--loading-bar-gradient: linear-gradient(to right, #9333ea 0%, #c084fc 100%);
 }
 
-/* Ä‘ĹşĹšĹĽ Mint Green */
+/* 🌿 Mint Green */
 .accent-mint {
 	--color-brand: #2dd4bf;
 	--color-brand-highlight: rgba(45, 212, 191, 0.22);
