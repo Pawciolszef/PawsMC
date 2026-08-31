@@ -103,3 +103,4 @@ packages/tooling-config/script-utils/import-sort.js
 *.key.pub
 .tauri/
 
+release_v1.1.0
