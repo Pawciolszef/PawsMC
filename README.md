@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🐾 PawsMC Launcher
+# PawsMC Launcher
 
 ### A clean, debloated, and ad-free Minecraft launcher
 
@@ -50,7 +50,7 @@
 
 ## ⚡ What Makes PawsMC Different?
 
-| Feature | Official Modrinth App | 🐾 PawsMC Launcher |
+| Feature | Official Modrinth App |  PawsMC Launcher |
 | :--- | :---: | :---: |
 | **Advertisements** | Included (Sidebar/Popups) | 🚫 **Completely Removed** |
 | **Telemetry & Analytics** | Enabled (PostHog / Sentry) | 🛡️ **Disabled & Stripped** |
