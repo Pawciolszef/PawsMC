@@ -2013,7 +2013,9 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 				:style="{
 					top: 'calc(var(--top-bar-height))',
 					left: 'calc(var(--left-bar-width))',
-					width: 'calc(100% - var(--left-bar-width) - var(--right-bar-width))',
+					width: sidebarVisible
+						? 'calc(100% - var(--left-bar-width) - var(--right-bar-width))'
+						: 'calc(100% - var(--left-bar-width))',
 				}"
 			>
 				<LoadingBar position="absolute" />
@@ -2028,7 +2030,7 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 				id="background-teleport-target"
 				class="absolute h-full -z-10 rounded-tl-[--radius-xl] overflow-hidden"
 				:style="{
-					width: 'calc(100% - var(--right-bar-width))',
+					width: sidebarVisible ? 'calc(100% - var(--right-bar-width))' : '100%',
 				}"
 			></div>
 			<Admonition
@@ -2055,13 +2057,14 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 				<template v-if="Component">
 					<Suspense @pending="onSuspensePending" @resolve="onSuspenseResolve">
 						<KeepAlive include="LibraryPage">
-							<component :is="Component" :key="route.fullPath"></component>
+							<component :is="Component" :key="route.path"></component>
 						</KeepAlive>
 					</Suspense>
 				</template>
 			</RouterView>
 		</div>
 		<div
+			v-if="sidebarVisible"
 			class="app-sidebar mt-px shrink-0 flex flex-col border-0 border-l-[1px] border-[--brand-gradient-border] border-solid"
 			:class="{ 'has-plus': hasPlus }"
 		>
@@ -2151,7 +2154,11 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 .app-contents {
 	--top-bar-height: 3rem;
 	--left-bar-width: 4rem;
-	--right-bar-width: 300px;
+	--right-bar-width: 0px;
+
+	&.sidebar-enabled {
+		--right-bar-width: 300px;
+	}
 }
 
 .app-grid-layout {
@@ -2199,6 +2206,10 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 
 	&.sidebar-enabled {
 		grid-template-columns: 1fr 300px;
+	}
+
+	&:not(.sidebar-enabled) .app-sidebar {
+		display: none;
 	}
 }
 

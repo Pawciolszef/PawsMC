@@ -2,6 +2,7 @@
 import type { Labrinth } from '@modrinth/api-client'
 import { RotateCounterClockwiseIcon, SearchIcon } from '@modrinth/assets'
 import { computed, ref, toValue } from 'vue'
+import { useRouter } from 'vue-router'
 
 import Admonition from '#ui/components/base/Admonition.vue'
 import { Button, IconButton } from '#ui/components/base/buttons'
@@ -45,6 +46,18 @@ const maxResultsOptions = computed<ComboboxOption<number>[]>(() =>
 		label: String(n),
 	})),
 )
+
+const router = useRouter()
+
+const sourceOptions: ComboboxOption<string>[] = [
+	{ value: 'modrinth', label: 'Modrinth' },
+	{ value: 'ftb', label: 'Feed The Beast (FTB)' },
+]
+
+const currentSourceOption = computed(() => {
+	const current = ctx.source?.value ?? 'modrinth'
+	return sourceOptions.find((opt) => opt.value === current) ?? sourceOptions[0]
+})
 
 const messages = defineMessages({
 	searchPlaceholder: {
@@ -138,11 +151,34 @@ function getProjectCardTags(result: Labrinth.Search.v3.ResultSearchProject, disp
 	</template>
 	<SelectedProjectsFloatingBar v-if="ctx.installContext?.value && ctx.variant !== 'web'" />
 
-	<NavTabs
-		v-if="ctx.showProjectTypeTabs.value"
-		:links="ctx.selectableProjectTypes.value"
-		:replace="ctx.variant === 'app'"
-	/>
+	<div class="flex flex-wrap items-center justify-between gap-4">
+		<NavTabs
+			v-if="ctx.showProjectTypeTabs.value"
+			:links="ctx.selectableProjectTypes.value"
+			:replace="ctx.variant === 'app'"
+		/>
+
+		<!-- Source Switcher (Modrinth / FTB) -->
+		<div v-if="ctx.source" class="flex items-center gap-2">
+			<span class="text-xs font-semibold text-secondary uppercase tracking-wider">Source:</span>
+			<div class="inline-flex rounded-full bg-surface-2 p-1 border border-solid border-surface-4">
+				<button
+					type="button"
+					v-for="opt in sourceOptions"
+					:key="opt.value"
+					@click="ctx.setSource?.(opt.value)"
+					:class="[
+						'px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border-0',
+						(ctx.source?.value ?? 'modrinth') === opt.value
+							? 'bg-brand text-brand-inverted shadow-sm'
+							: 'bg-transparent text-secondary hover:text-primary hover:bg-surface-3'
+					]"
+				>
+					{{ opt.label }}
+				</button>
+			</div>
+		</div>
+	</div>
 
 	<Input
 		v-model="ctx.query.value"
@@ -210,6 +246,23 @@ function getProjectCardTags(result: Labrinth.Search.v3.ResultSearchProject, disp
 				<span class="font-semibold text-primary">{{ formatMessage(messages.viewPrefix) }}</span>
 			</template>
 		</Combobox>
+		<Combobox
+			v-if="ctx.source"
+			:model-value="ctx.source?.value ?? 'modrinth'"
+			:options="sourceOptions"
+			trigger-type="base"
+			:class="
+				ctx.variant === 'web'
+					? '!w-[13rem] min-w-max max-w-full flex-grow md:flex-grow-0'
+					: '!w-[13rem] min-w-max max-w-full'
+			"
+			placeholder="Source"
+			@update:model-value="(val: string) => ctx.setSource?.(val)"
+		>
+			<template #prefix>
+				<span class="font-semibold text-primary">Source:</span>
+			</template>
+		</Combobox>
 
 		<div v-if="ctx.filtersMenuOpen && !ctx.filtersMenuOpen.value" class="lg:hidden">
 			<Button @click="ctx.filtersMenuOpen.value = true">
@@ -233,16 +286,14 @@ function getProjectCardTags(result: Labrinth.Search.v3.ResultSearchProject, disp
 		/>
 	</div>
 
-	<SearchFilterControl
-		v-if="ctx.isServerType.value"
+	<SearchFilterControl v-if="(!ctx.source?.value || ctx.source.value === 'modrinth') && ctx.isServerType.value"
 		v-model:selected-filters="ctx.serverCurrentFilters.value"
 		:filters="ctx.serverFilterTypes.value"
 		:project-type="ctx.projectType.value"
 		:provided-filters="[]"
 		:overridden-provided-filter-types="[]"
 	/>
-	<SearchFilterControl
-		v-else
+	<SearchFilterControl v-else-if="!ctx.source?.value || ctx.source.value === 'modrinth'"
 		v-model:selected-filters="ctx.currentFilters.value"
 		:filters="
 			ctx.filters.value.filter(
@@ -272,6 +323,29 @@ function getProjectCardTags(result: Labrinth.Search.v3.ResultSearchProject, disp
 		>
 			<p>{{ formatMessage(messages.noResults) }}</p>
 		</section>
+
+		<div
+			v-if="ctx.source?.value === 'ftb' && ctx.projectType.value !== 'modpack'"
+			class="my-8 flex flex-col items-center justify-center rounded-2xl bg-surface-2 p-8 text-center border border-surface-5"
+		>
+			<div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-brand/10 text-brand text-3xl">
+				📦
+			</div>
+			<h3 class="text-xl font-bold text-primary mb-2">
+				FTB does not support adding {{ formatProjectTypeSentence(formatMessage, ctx.projectType.value, 2) }}
+			</h3>
+			<p class="max-w-md text-secondary text-sm mb-6">
+				Feed The Beast exclusively curates and distributes complete Modpacks. To browse standalone mods, shaders, resource packs, or data packs, switch the source to Modrinth.
+			</p>
+			<div class="flex flex-wrap gap-3 justify-center">
+				<Button type="colored" color="brand" @click="ctx.setSource?.('modrinth')">
+					Switch to Modrinth
+				</Button>
+				<Button type="base" @click="router.push('/browse/modpack')">
+					Browse FTB Modpacks
+				</Button>
+			</div>
+		</div>
 
 		<ProjectCardList v-else :layout="ctx.effectiveLayout.value">
 			<template v-if="ctx.isServerType.value">

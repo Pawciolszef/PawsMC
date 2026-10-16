@@ -57,7 +57,7 @@ impl RpcServerBuilder {
                     waiting_responses: waiting_responses.clone(),
                 };
                 if let Err(e) = server.run(socket).await {
-                    tracing::error!("Failed to run RPC server: {e}");
+                    tracing::debug!("RPC server finished with error: {e}");
                 }
                 waiting_responses.lock().unwrap().clear();
             })
@@ -177,7 +177,16 @@ impl RunningRpcServer {
                     let message: RpcMessage = match message {
                         None => break,
                         Some(Ok(message)) => serde_json::from_str(&message)?,
-                        Some(Err(LinesCodecError::Io(e))) => Err(e)?,
+                        Some(Err(LinesCodecError::Io(e))) => {
+                            if e.kind() == std::io::ErrorKind::ConnectionReset
+                                || e.kind() == std::io::ErrorKind::ConnectionAborted
+                                || e.raw_os_error() == Some(10054)
+                            {
+                                tracing::debug!("RPC client disconnected: {e}");
+                                break;
+                            }
+                            Err(e)?
+                        }
                         Some(Err(LinesCodecError::MaxLineLengthExceeded)) => unreachable!(),
                     };
                     self.handle_message(message).await?

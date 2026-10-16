@@ -1,6 +1,6 @@
 # PawsMC
 
-PawsMC is a lightweight, ad-free Minecraft launcher built with Tauri v2 and Rust, forked from Modrinth's Theseus client. It provides direct support for Modrinth, Feed The Beast (FTB), and CurseForge modpacks without telemetry or promotional clutter.
+PawsMC is a lightweight, ad-free Minecraft launcher built with Tauri v2 and Rust, forked from Modrinth's Theseus client. It provides direct support for Modrinth and Feed The Beast (FTB) modpacks without telemetry or promotional clutter.
 
 [![Website](https://img.shields.io/badge/Website-pawsmc.pawciol.eu-2563eb)](https://pawsmc.pawciol.eu)
 [![Release](https://img.shields.io/github/v/release/Pawciolszef/PawsMC?color=2563eb)](https://github.com/Pawciolszef/PawsMC/releases)
@@ -15,7 +15,7 @@ PawsMC is an independent fork of the open-source [Modrinth App (Theseus)](https:
 
 ### Key Changes from Upstream
 
-- **Extended Modpack Providers**: Native search, filtering, and installation for Feed The Beast (FTB) modpacks (including CurseForge-hosted FTB packs such as FTB Skies 2) alongside standard Modrinth and CurseForge content.
+- **Extended Modpack Providers**: Native search, filtering, and installation for Feed The Beast (FTB) modpacks alongside standard Modrinth content.
 - **Removed Telemetry & Ads**: Analytics services (PostHog, Sentry) and server hosting promotions have been stripped out.
 - **Theme Customization**: Additional UI color themes (OLED Black, Charcoal Gray, Forest Green) and custom accent palettes with real-time switching.
 - **Interface Improvements**: Quick Play button for recently played instances, local screenshot preview widget with lightbox, and enhanced Discord Rich Presence.
@@ -24,7 +24,7 @@ PawsMC is an independent fork of the open-source [Modrinth App (Theseus)](https:
 
 ## Features
 
-- **Multi-Source Modpacks**: Browse and install packs from Modrinth, FTB, and CurseForge directly inside the app.
+- **Multi-Source Modpacks**: Browse and install packs from Modrinth and FTB directly inside the app.
 - **Mod Loaders**: Automatic setup and version resolution for Fabric, NeoForge, Forge, and Quilt, as well as Vanilla profiles.
 - **Instance Isolation**: Separate directories, configurations, and worlds per instance to avoid mod conflicts.
 - **Java Management**: Automatic detection and installation of required Java runtimes (Java 8 through 21+).

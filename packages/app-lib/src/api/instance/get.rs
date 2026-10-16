@@ -285,7 +285,7 @@ fn detect_loader_from_dir(dir: &Path) -> ModLoader {
     ModLoader::Vanilla
 }
 
-fn detect_game_version_from_name_or_dir(name: &str, dir: &Path) -> Option<String> {
+fn detect_game_version_from_name_or_dir(name: &str, _dir: &Path) -> Option<String> {
     // 1. Try matching whole Minecraft version token like "1.21.5", "1.21.11", "1.8.9"
     if let Ok(re) = regex::Regex::new(r"\b1\.\d{1,2}(?:\.\d{1,2})?\b") {
         if let Some(m) = re.find(name) {

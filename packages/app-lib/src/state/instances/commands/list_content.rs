@@ -351,13 +351,18 @@ pub(crate) async fn get_linked_modpack_info(
         &state.pool,
     )
     .await?;
-    let Some((project_id, version_id)) =
-        linked_modpack_ids_for_instance(&resolved.instance.id, &state.pool)
-            .await?
-    else {
+    let link = sqlite::instance_rows::get_instance_link(
+        &resolved.instance.id,
+        &state.pool,
+    )
+    .await?;
+    if is_imported_modpack_scope(&link) {
+        return Ok(None);
+    }
+    let Some((project_id, version_id)) = linked_modpack_ids(&link) else {
         return Ok(None);
     };
-    let (project, version, all_versions) = tokio::try_join!(
+    let (project, version, all_versions) = match tokio::try_join!(
         CachedEntry::get_project(
             &project_id,
             cache_behaviour,
@@ -376,14 +381,20 @@ pub(crate) async fn get_linked_modpack_info(
             &state.pool,
             &state.api_semaphore,
         ),
-    )?;
+    ) {
+        Ok(res) => res,
+        Err(err) => {
+            tracing::warn!("Failed to fetch linked modpack info for {project_id}: {err}");
+            return Ok(None);
+        }
+    };
     let version_project_id = version
         .as_ref()
         .filter(|version| version.project_id != project_id)
         .map(|version| version.project_id.clone());
     let (project, all_versions) =
         if let Some(version_project_id) = version_project_id {
-            let (modpack_project, modpack_versions) = tokio::try_join!(
+            let (modpack_project, modpack_versions) = match tokio::try_join!(
                 CachedEntry::get_project(
                     &version_project_id,
                     cache_behaviour,
@@ -396,16 +407,21 @@ pub(crate) async fn get_linked_modpack_info(
                     &state.pool,
                     &state.api_semaphore,
                 ),
-            )?;
+            ) {
+                Ok(res) => res,
+                Err(err) => {
+                    tracing::warn!("Failed to fetch modpack project for {version_project_id}: {err}");
+                    (None, None)
+                }
+            };
             (modpack_project.or(project), modpack_versions)
         } else {
             (project, all_versions)
         };
-    let project = project.ok_or_else(|| {
-        crate::ErrorKind::InputError(format!(
-            "Linked modpack project {project_id} not found"
-        ))
-    })?;
+    let Some(project) = project else {
+        tracing::warn!("Linked modpack project {project_id} not found");
+        return Ok(None);
+    };
     let owner = if let Some(org_id) = &project.organization {
         let org = CachedEntry::get_organization(
             org_id,
@@ -1136,6 +1152,7 @@ fn is_imported_modpack_scope(link: &InstanceLink) -> bool {
     matches!(link, InstanceLink::ImportedModpack { .. })
 }
 
+#[allow(dead_code)]
 async fn linked_modpack_ids_for_instance(
     instance_id: &str,
     pool: &SqlitePool,
@@ -1156,11 +1173,7 @@ fn linked_modpack_ids(link: &InstanceLink) -> Option<(String, String)> {
             content_version_id,
             ..
         } => Some((content_project_id.clone(), content_version_id.clone())),
-        InstanceLink::ImportedModpack {
-            project_id: Some(project_id),
-            version_id: Some(version_id),
-            ..
-        } => Some((project_id.clone(), version_id.clone())),
+        InstanceLink::ImportedModpack { .. } => None,
         InstanceLink::SharedInstance {
             modpack_project_id: Some(project_id),
             modpack_version_id: Some(version_id),

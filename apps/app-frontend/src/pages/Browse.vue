@@ -35,6 +35,7 @@ import {
 import { useQuery, useQueryClient } from '@tanstack/vue-query'
 import type { Ref } from 'vue'
 import { computed, onBeforeUnmount, ref, shallowRef, watch } from 'vue'
+import { invoke } from '@tauri-apps/api/core'
 import type { LocationQuery } from 'vue-router'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -64,7 +65,7 @@ import {
 	provideServerInstallContent,
 } from '@/providers/setup/server-install-content'
 
-const { handleError } = injectNotificationManager()
+const { addNotification, handleError } = injectNotificationManager()
 const { formatMessage } = useVIntl()
 const { installingServerProjects, playServerProject, showAddServerToInstanceModal } =
 	injectServerInstall()
@@ -613,6 +614,14 @@ const messages = defineMessages({
 		id: 'search.filter.locked.instance.sync',
 		defaultMessage: 'Sync with instance',
 	},
+	ftbNoModsTitle: {
+		id: 'app.browse.ftb-no-mods-title',
+		defaultMessage: "FTB doesn't provide mods",
+	},
+	ftbNoModsBody: {
+		id: 'app.browse.ftb-no-mods-body',
+		defaultMessage: 'Feed The Beast (FTB) only provides complete modpacks, not standalone mods, resource packs, or shaders.',
+	},
 })
 
 const projectType = ref<ProjectType>(route.params.projectType as ProjectType)
@@ -644,6 +653,13 @@ watch(
 
 		debugLog('projectType route param changed', { from: projectType.value, to: newType })
 		projectType.value = newType
+		if (currentSource.value === 'ftb' && newType !== 'modpack') {
+			addNotification({
+				type: 'warning',
+				title: formatMessage(messages.ftbNoModsTitle),
+				text: formatMessage(messages.ftbNoModsBody),
+			})
+		}
 	},
 )
 
@@ -986,6 +1002,40 @@ function getCardActions(
 		]
 	}
 
+	if (projectResult.project_id?.startsWith('ftb-')) {
+		const ftbId = parseInt(projectResult.project_id.replace(/^ftb-/, ''), 10)
+		return [
+			{
+				key: 'install',
+				label: formatMessage(isInstalling ? messages.installingToServer : commonMessages.installButton),
+				icon: isInstalling ? SpinnerIcon : PlusIcon,
+				iconClass: isInstalling ? 'animate-spin' : undefined,
+				disabled: isInstalling,
+				color: 'brand',
+				type: 'outlined',
+				onClick: async () => {
+					setProjectInstalling(projectResult.project_id, true)
+					try {
+						const newInstanceId = (await invoke('plugin:ftb|install_ftb_modpack', {
+							modpackId: ftbId,
+							versionId: null,
+							instanceName: null,
+						})) as string
+
+						if (newInstanceId) {
+							router.push(`/instance/${encodeURIComponent(newInstanceId)}`)
+						}
+					} catch (err) {
+						console.error('[FTB] Installation error:', err)
+						handleError(err as Error)
+					} finally {
+						setProjectInstalling(projectResult.project_id, false)
+					}
+				},
+			},
+		]
+	}
+
 	const isModpack = projectResult.project_types?.includes('modpack')
 	const shouldUseInstallIcon = !!instance.value || isModpack
 
@@ -1069,8 +1119,104 @@ function onSearchResultsInstalled(ids: string[]) {
 }
 
 async function search(requestParams: string) {
-	debugLog('searching v3', requestParams)
+	debugLog('searching v3', requestParams, currentSource.value)
 	const isServer = projectType.value === 'server'
+
+	if (currentSource.value === 'ftb') {
+		if (projectType.value !== 'modpack') {
+			return {
+				projectHits: [],
+				serverHits: [],
+				total_hits: 0,
+				per_page: 20,
+			}
+		}
+
+		try {
+			const urlParams = new URLSearchParams(requestParams)
+			const queryText = urlParams.get('query')?.trim() || null
+			const limit = Number(urlParams.get('limit')) || 20
+			const sortIndex = urlParams.get('index') || 'relevance'
+
+			const rawPacks = (await invoke('plugin:ftb|search_ftb_modpacks', {
+				term: queryText,
+				limit,
+				sort: sortIndex,
+			})) as any[]
+
+			const hits = (rawPacks || []).map((pack: any) => {
+				const projectId = `ftb-${pack.id}`
+
+				const iconUrl = pack.icon_url || null
+				const bannerUrl = pack.banner_url || null
+
+				const authorsList = Array.isArray(pack.authors)
+					? pack.authors.map((a: any) => (typeof a === 'string' ? a : a?.name)).filter(Boolean)
+					: []
+				const authorStr = authorsList.length > 0 ? authorsList.join(', ') : 'FTB Team'
+
+				const tagsList = Array.isArray(pack.tags)
+					? pack.tags.map((t: any) => (typeof t === 'string' ? t : t?.name)).filter(Boolean)
+					: []
+				const categories = tagsList.length > 0 ? tagsList : ['FTB']
+
+				const gameVersion = pack.latest_game_version || '1.20.1'
+				const loader = (pack.latest_loader || 'forge').toLowerCase()
+
+				const bestUpdatedTs = pack.updated && pack.updated > 0 ? pack.updated : null
+				const dateModified = bestUpdatedTs ? new Date(bestUpdatedTs * 1000).toISOString() : new Date().toISOString()
+				const releasedTs = pack.released && pack.released > 0 ? pack.released : bestUpdatedTs
+				const dateCreated = releasedTs ? new Date(releasedTs * 1000).toISOString() : dateModified
+
+				return {
+					project_id: projectId,
+					project_types: ['modpack'],
+					all_project_types: ['modpack'],
+					slug: projectId,
+					author: authorStr,
+					author_id: null,
+					organization: null,
+					organization_id: null,
+					name: pack.name || `FTB Modpack ${pack.id}`,
+					title: pack.name || `FTB Modpack ${pack.id}`,
+					summary: pack.synopsis || pack.description || '',
+					description: pack.description || pack.synopsis || '',
+					categories,
+					display_categories: categories,
+					versions: [],
+					downloads: Number(pack.installs || pack.plays || 0),
+					follows: Number(pack.plays || 0),
+					icon_url: iconUrl,
+					featured_gallery: bannerUrl,
+					gallery: [],
+					disclosure_types: [],
+					color: 0x38bdf8,
+					loaders: [loader],
+					date_modified: dateModified,
+					date_created: dateCreated,
+					client_side: 'required',
+					server_side: 'optional',
+					license: 'Custom',
+					game_versions: [gameVersion],
+				} as unknown as Labrinth.Search.v3.ResultSearchProject
+			})
+
+			return {
+				projectHits: hits,
+				serverHits: [],
+				total_hits: hits.length,
+				per_page: limit,
+			}
+		} catch (err) {
+			console.warn('[FTB] Search error:', err)
+			return {
+				projectHits: [],
+				serverHits: [],
+				total_hits: 0,
+				per_page: 20,
+			}
+		}
+	}
 
 	const rawResults = await queryClient.fetchQuery({
 		queryKey: ['search', 'v3', requestParams],
@@ -1142,6 +1288,21 @@ const lockedFilterMessages = computed(() => ({
 	syncButton: formatMessage(messages.syncFilterButton),
 	providedBy: formatMessage(messages.providedByInstance),
 }))
+
+const currentSource = ref<'modrinth' | 'ftb'>('modrinth')
+
+function setSource(source: 'modrinth' | 'ftb') {
+	debugLog('changing source', { from: currentSource.value, to: source })
+	currentSource.value = source
+	if (source === 'ftb' && projectType.value !== 'modpack') {
+		addNotification({
+			type: 'warning',
+			title: formatMessage(messages.ftbNoModsTitle),
+			text: formatMessage(messages.ftbNoModsBody),
+		})
+	}
+	void searchState.refreshSearch()
+}
 
 const searchState = useBrowseSearch({
 	projectType,
@@ -1252,15 +1413,22 @@ const dismissedPhotosensitivityFilterWarning = computed({
 })
 
 provideBrowseManager({
+	source: currentSource,
+	setSource,
 	tags,
 	projectType,
 	...searchState,
 	advancedFiltersCollapsed,
 	dismissedPhotosensitivityFilterWarning,
-	getProjectLink: (result: Labrinth.Search.v3.ResultSearchProject) => ({
-		path: `/project/${result.project_id ?? result.slug}`,
-		query: getProjectBrowseQuery(),
-	}),
+	getProjectLink: (result: Labrinth.Search.v3.ResultSearchProject) => {
+		if (result.project_id?.startsWith('ftb-')) {
+			return undefined as any
+		}
+		return {
+			path: `/project/${result.project_id ?? result.slug}`,
+			query: getProjectBrowseQuery(),
+		}
+	},
 	getServerProjectLink: (result: Labrinth.Search.v3.ResultSearchProject) => ({
 		path: `/project/${result.slug ?? result.project_id}`,
 		query: getProjectBrowseQuery(),

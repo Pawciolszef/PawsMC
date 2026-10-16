@@ -107,6 +107,8 @@ export interface BrowseManagerContext {
 	}>
 
 	loadingComponent?: Component
+	source?: Ref<'modrinth' | 'ftb'>
+	setSource?: (source: 'modrinth' | 'ftb') => void
 }
 
 export const [injectBrowseManager, provideBrowseManager] = createContext<BrowseManagerContext>(

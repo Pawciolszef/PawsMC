@@ -410,6 +410,19 @@ fn main() {
                     ),
             )
             .plugin(
+                "ftb",
+                InlinedPlugin::new()
+                    .commands(&[
+                        "search_ftb_modpacks",
+                        "get_ftb_modpack_details",
+                        "get_ftb_modpack_version_manifest",
+                        "install_ftb_modpack",
+                    ])
+                    .default_permission(
+                        DefaultPermissionRule::AllowAllCommands,
+                    ),
+            )
+            .plugin(
                 "worlds",
                 InlinedPlugin::new()
                     .commands(&[
