@@ -11,28 +11,18 @@ tmp
 node_modules
 
 # IDEs and editors
+.idea/
+.vscode/
+.vs/
+*.suo
+*.user
 .project
 .classpath
 .c9/
 *.launch
 .settings/
 *.sublime-workspace
-
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/i18n-ally-custom-framework.yml
-
-# IDE - IntelliJ
-.idea/*
-!.idea/code.iml
-!.idea/gradle.xml
-!.idea/icon.svg
-!.idea/modules.xml
-!.idea/vcs.xml
+*.sublime-project
 
 # misc
 /.sass-cache
@@ -103,4 +93,6 @@ packages/tooling-config/script-utils/import-sort.js
 *.key.pub
 .tauri/
 
-release_v1.1.0
+# Release artifacts
+release_*/
+release/
