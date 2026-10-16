@@ -1,34 +1,32 @@
-name: 🎮 Bug with Modrinth App
-description: For issues with Modrinth App.
-labels: [app]
+name: 🐛 Bug report
+description: Report a bug or unexpected behavior in PawsMC
+labels: [bug]
 type: 'bug'
 body:
   - type: checkboxes
     attributes:
       label: Please confirm the following.
       options:
-        - label: I checked the [existing issues](https://github.com/modrinth/code/issues?q=is%3Aissue) for duplicate problems
+        - label: I checked the [existing issues](https://github.com/Pawciolszef/PawsMC/issues) for duplicate problems
           required: true
-        - label: I have tried resolving the issue using the [support portal](https://support.modrinth.com)
-          required: true
-        - label: I have ensured my Modrinth App installation is up to date
+        - label: I have ensured my PawsMC installation is up to date
           required: true
   - type: input
     id: version
     attributes:
-      label: What version of the Modrinth App are you using?
-      description: Find this in ⚙️ Settings (bottom right) -> After Modrinth App (bottom left)
+      label: What version of PawsMC are you using?
+      description: Find this in ⚙️ Settings (bottom left)
+      placeholder: 'e.g. 1.2.0'
     validations:
       required: true
   - type: dropdown
     id: oses
     attributes:
-      label: What operating systems are you seeing the problem on?
-      multiple: true
+      label: What operating system are you on?
       options:
         - Windows
-        - MacOS
         - Linux
+        - MacOS
   - type: textarea
     attributes:
       label: Describe the bug
@@ -42,8 +40,7 @@ body:
       placeholder: |
         1. Go to '...'
         2. Click on '...'
-        3. Scroll down to '...'
-        4. See error
+        3. See error
     validations:
       required: false
   - type: textarea
@@ -54,7 +51,7 @@ body:
       required: false
   - type: textarea
     attributes:
-      label: Additional context
-      description: Add any other context about the problem here.
+      label: Additional context & Logs
+      description: Add launcher logs or any other context about the problem here.
     validations:
       required: false
