@@ -5,13 +5,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const data = await res.json();
         
-        // Update tag badge
         const badge = document.getElementById('versionBadge');
         if (badge && data.tag_name) {
-            badge.textContent = `${data.tag_name} Release`;
+            badge.textContent = data.tag_name;
         }
 
-        // Update download links
         if (data.assets && Array.isArray(data.assets)) {
             const setup = data.assets.find(a => a.name.endsWith('.exe') && !a.name.endsWith('.sig') && a.name.includes('Setup'));
             const zip = data.assets.find(a => a.name.endsWith('.zip'));

@@ -3,17 +3,12 @@ FROM nginx:alpine
 # Remove default nginx static assets
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy website files
-COPY . /usr/share/nginx/html
-
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Remove docker files from static serve
-RUN rm -f /usr/share/nginx/html/Dockerfile \
-          /usr/share/nginx/html/docker-compose.yml \
-          /usr/share/nginx/html/nginx.conf \
-          /usr/share/nginx/html/package.json
+# Copy only necessary website files
+COPY index.html style.css app.js /usr/share/nginx/html/
+COPY assets/ /usr/share/nginx/html/assets/
 
 EXPOSE 80
 

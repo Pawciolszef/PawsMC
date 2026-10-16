@@ -1,0 +1,8 @@
+Dockerfile
+docker-compose.yml
+nginx.conf
+package.json
+.git
+.gitignore
+README.md
+node_modules
